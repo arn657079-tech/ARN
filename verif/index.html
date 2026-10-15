@@ -1,65 +1,30 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vérification ARN</title>
-<style>
-body{font-family:Arial, sans-serif;background:#eef2f7;margin:0;padding:15px}
-.container{max-width:440px;margin:30px auto}
-.box{background:#fff;padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.1);text-align:center}
-.valide{border-top:8px solid #16a34a}
-.fraude{border-top:8px solid #dc2626}
-.badge{padding:12px 22px;border-radius:30px;font-weight:bold;font-size:20px;display:inline-block;margin:16px 0}
-.badge-v{background:#dcfce7;color:#16a34a;border:2px solid #16a34a}
-.badge-f{background:#fee2e2;color:#dc2626;border:2px solid #dc2626}
-.line{text-align:left;padding:10px 0;border-bottom:1px solid #eee;font-size:15px}
-.line b{display:inline-block;width:100px;color:#555}
-input{width:100%;padding:14px;border:2px solid #ddd;border-radius:10px;font-size:16px;box-sizing:border-box}
-button{width:100%;padding:14px;background:#1e3a8a;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:bold;margin-top:10px;cursor:pointer}
-.small{font-size:12px;color:#888;margin-top:20px;line-height:1.4}
-</style>
-</head>
-<body>
-<div class="container">
-<div id="result"></div>
-<div class="small" style="text-align:center;margin-top:20px">Système officiel anti-fraude<br>arn-assoc.org/verif/</div>
-</div>
-
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARN Verification</title>
+<style>body{font-family:Arial;background:#eef2f7;margin:0;padding:12px}.card{max-width:440px;margin:15px auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.18)}.top{padding:20px;text-align:center;color:#fff}.top.ok{background:#16a34a}.top.bad{background:#dc2626}.top img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#fff}.info{padding:18px}.line{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed #e2e8f0;font-size:14px}.lab{color:#64748b}.val{font-weight:700;color:#0f172a;text-align:right;max-width:55%}.badge{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold}.ACTIF{background:#dcfce7;color:#166534}.foot{padding:14px;background:#f8fafc;text-align:center;font-size:12px}</style></head><body>
+<div id="app" style="text-align:center;padding:60px">Chargement...</div>
 <script>
-async function load() {
-  let id = new URLSearchParams(window.location.search).get('id') || new URLSearchParams(window.location.search).get('code');
-  if(!id){
-    const path = window.location.pathname.split('/').pop();
-    if(path && path.includes('ARN')) id = path.replace('.html','');
-  }
-
-  const box = document.getElementById('result');
-  
-  if(!id){
-    box.innerHTML = `<div class="box"><h3>Vérifier une carte ARN</h3><input id="inp" placeholder="Ex: ARN20260001"><button onclick="verif()">VÉRIFIER</button><div class="small">Entrez le numéro inscrit sur la carte ou scannez le QR code</div></div>`;
-    window.verif = () => {
-      const v = document.getElementById('inp').value.trim();
-      if(v) window.location.href = '?id=' + v;
-    }
-    return;
-  }
-
-  try{
-    const res = await fetch('membres.json?v='+Date.now());
-    const membres = await res.json();
-    const m = membres.find(x => x.id.toUpperCase() === id.toUpperCase());
-    
-    if(m){
-      box.innerHTML = `<div class="box valide"><h2>ARN-ASSOC.ORG</h2><div class="badge badge-v">✅ CARTE VALIDE</div><div class="line"><b>Numéro:</b> ${m.id}</div><div class="line"><b>Nom:</b> ${m.nom}</div><div class="line"><b>Fonction:</b> ${m.fonction}</div><div class="line"><b>Statut:</b> ${m.statut}</div><div class="small">Document authentique vérifié sur arn-assoc.org</div></div>`;
-    } else {
-      box.innerHTML = `<div class="box fraude"><h2>ARN-ASSOC.ORG</h2><div class="badge badge-f">❌ CARTE INVALIDE</div><div class="line"><b>Numéro:</b> ${id}</div><div class="line"><b>Résultat:</b> Ce numéro n'existe pas dans notre base</div><div class="small" style="color:#dc2626;font-weight:bold">ATTENTION : Possible fraude. Contactez le bureau ARN.</div></div>`;
-    }
-  } catch(e){
-    box.innerHTML = `<div class="box fraude">Erreur de chargement de la base. Vérifiez que membres.json existe.</div>`;
-  }
-}
-load();
-</script>
-</body>
-  </html>
+const q=new URLSearchParams(location.search).get('id')||'';
+async function go(){
+ const r=await fetch('./membres.json?v='+Date.now());const list=await r.json();
+ const k=q.toUpperCase().replace(/\s+/g,'');
+ const m=list.find(x=> (x.id||'').toUpperCase().replace(/\s+/g,'')===k || (x.matricule||'').toUpperCase().replace(/\s+/g,'')===k || (x.serie||'')===q);
+ const app=document.getElementById('app');
+ if(!m){app.innerHTML=`<div class="card"><div class="top bad"><h2>CARTE NON VALIDE</h2><p>${q}</p></div><div class="info" style="text-align:center">Membre introuvable.</div></div>`;return;}
+ const ph=m.photo?`./${m.photo}`:`https://ui-avatars.com/api/?name=${encodeURIComponent(m.nom)}&background=1e3a8a&color=fff&size=300`;
+ app.innerHTML=`<div class="card"><div class="top ok"><img src="${ph}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(m.nom)}&background=fff&color=1e3a8a&size=300'"><h2 style="margin:8px 0">${m.nom}</h2><div>${m.fonction}</div><div style="margin-top:10px"><span class="badge ${m.statut}">${m.statut}</span></div></div><div class="info">
+ <div class="line"><span class="lab">N° Série</span><span class="val">${m.serie}</span></div>
+ <div class="line"><span class="lab">Matricule</span><span class="val">${m.matricule}</span></div>
+ <div class="line"><span class="lab">Prénom et Nom</span><span class="val">${m.nom}</span></div>
+ <div class="line"><span class="lab">Fonction</span><span class="val">${m.fonction}</span></div>
+ <div class="line"><span class="lab">Statut</span><span class="val">${m.statut}</span></div>
+ <div class="line"><span class="lab">Validité</span><span class="val">${m.validite}</span></div>
+ <div class="line"><span class="lab">Expiré</span><span class="val">${m.expire}</span></div>
+ <div class="line"><span class="lab">Contact</span><span class="val">${m.contact}</span></div>
+ <div class="line"><span class="lab">Siège</span><span class="val">${m.siege}</span></div>
+ <div class="line"><span class="lab">Remise</span><span class="val">${m.remise}</span></div>
+ <div class="line"><span class="lab">Signature</span><span class="val">${m.signature}</span></div>
+ ${m.nb?`<div style="margin-top:12px;background:#fff7ed;padding:10px;border-radius:8px;font-size:12px"><b>NB:</b> ${m.nb}</div>`:''}
+ <div style="text-align:center;margin-top:15px;font-size:11px;color:#64748b">Vérifié le ${new Date().toLocaleDateString('fr-FR')}</div>
+ </div><div class="foot">✅ Document officiel ARN - Conakry</div></div>`;
+}go();
+</script></body></html>
