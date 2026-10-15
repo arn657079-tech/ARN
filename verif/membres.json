@@ -1,5 +1,18 @@
 [
-  {"id":"ARN20260001","nom":"BAH Adama","fonction":"Président","statut":"ACTIF"},
-  {"id":"ARN20260002","nom":"DIALLO Mariam","fonction":"Secrétaire","statut":"ACTIF"},
-  {"id":"ARN20260003","nom":"BARRY Ousmane","fonction":"Membre","statut":"ACTIF"}
+  {
+    "serie": "0001",
+    "matricule": "ARN 2026 0001",
+    "id": "ARN20260001",
+    "nom": "Fara M'BINDY Kamano",
+    "fonction": "Président",
+    "photo": "photos/ARN20260001.jpg",
+    "statut": "ACTIF",
+    "validite": "2 ans",
+    "expire": "31/12/2027",
+    "contact": "620 00 00 00",
+    "siege": "Conakry",
+    "remise": "15/10/2026",
+    "signature": "Le Président",
+    "nb": "Carte personnelle et incessible"
+  }
 ]
