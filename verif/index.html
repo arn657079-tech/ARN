@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vérification ARN</title>
+<style>
+body{font-family:Arial, sans-serif;background:#eef2f7;margin:0;padding:15px}
+.container{max-width:440px;margin:30px auto}
+.box{background:#fff;padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.1);text-align:center}
+.valide{border-top:8px solid #16a34a}
+.fraude{border-top:8px solid #dc2626}
+.badge{padding:12px 22px;border-radius:30px;font-weight:bold;font-size:20px;display:inline-block;margin:16px 0}
+.badge-v{background:#dcfce7;color:#16a34a;border:2px solid #16a34a}
+.badge-f{background:#fee2e2;color:#dc2626;border:2px solid #dc2626}
+.line{text-align:left;padding:10px 0;border-bottom:1px solid #eee;font-size:15px}
+.line b{display:inline-block;width:100px;color:#555}
+input{width:100%;padding:14px;border:2px solid #ddd;border-radius:10px;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:14px;background:#1e3a8a;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:bold;margin-top:10px;cursor:pointer}
+.small{font-size:12px;color:#888;margin-top:20px;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="result"></div>
+<div class="small" style="text-align:center;margin-top:20px">Système officiel anti-fraude<br>arn-assoc.org/verif/</div>
+</div>
+
+<script>
+async function load() {
+  let id = new URLSearchParams(window.location.search).get('id') || new URLSearchParams(window.location.search).get('code');
+  if(!id){
+    const path = window.location.pathname.split('/').pop();
+    if(path && path.includes('ARN')) id = path.replace('.html','');
+  }
+
+  const box = document.getElementById('result');
+  
+  if(!id){
+    box.innerHTML = `<div class="box"><h3>Vérifier une carte ARN</h3><input id="inp" placeholder="Ex: ARN20260001"><button onclick="verif()">VÉRIFIER</button><div class="small">Entrez le numéro inscrit sur la carte ou scannez le QR code</div></div>`;
+    window.verif = () => {
+      const v = document.getElementById('inp').value.trim();
+      if(v) window.location.href = '?id=' + v;
+    }
+    return;
+  }
+
+  try{
+    const res = await fetch('membres.json?v='+Date.now());
+    const membres = await res.json();
+    const m = membres.find(x => x.id.toUpperCase() === id.toUpperCase());
+    
+    if(m){
+      box.innerHTML = `<div class="box valide"><h2>ARN-ASSOC.ORG</h2><div class="badge badge-v">✅ CARTE VALIDE</div><div class="line"><b>Numéro:</b> ${m.id}</div><div class="line"><b>Nom:</b> ${m.nom}</div><div class="line"><b>Fonction:</b> ${m.fonction}</div><div class="line"><b>Statut:</b> ${m.statut}</div><div class="small">Document authentique vérifié sur arn-assoc.org</div></div>`;
+    } else {
+      box.innerHTML = `<div class="box fraude"><h2>ARN-ASSOC.ORG</h2><div class="badge badge-f">❌ CARTE INVALIDE</div><div class="line"><b>Numéro:</b> ${id}</div><div class="line"><b>Résultat:</b> Ce numéro n'existe pas dans notre base</div><div class="small" style="color:#dc2626;font-weight:bold">ATTENTION : Possible fraude. Contactez le bureau ARN.</div></div>`;
+    }
+  } catch(e){
+    box.innerHTML = `<div class="box fraude">Erreur de chargement de la base. Vérifiez que membres.json existe.</div>`;
+  }
+}
+load();
+</script>
+</body>
+  </html>
