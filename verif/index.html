@@ -1,30 +1,64 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARN Verification</title>
-<style>body{font-family:Arial;background:#eef2f7;margin:0;padding:12px}.card{max-width:440px;margin:15px auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.18)}.top{padding:20px;text-align:center;color:#fff}.top.ok{background:#16a34a}.top.bad{background:#dc2626}.top img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#fff}.info{padding:18px}.line{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed #e2e8f0;font-size:14px}.lab{color:#64748b}.val{font-weight:700;color:#0f172a;text-align:right;max-width:55%}.badge{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold}.ACTIF{background:#dcfce7;color:#166534}.foot{padding:14px;background:#f8fafc;text-align:center;font-size:12px}</style></head><body>
-<div id="app" style="text-align:center;padding:60px">Chargement...</div>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARN - Vérification</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f2f2f2;margin:0;padding:15px;display:flex;justify-content:center}
+.card{background:#fff;max-width:420px;width:100%;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.15);overflow:hidden}
+.header{padding:18px;text-align:center;color:#fff}
+.header.ok{background:#16a34a}.header.bad{background:#dc2626}
+.content{padding:20px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
+.row b{color:#555}.row span{font-weight:700;text-align:right}
+.footer{padding:12px;text-align:center;font-size:12px;color:#777;background:#fafafa}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.badge.ok{background:#dcfce7;color:#166534}.badge.bad{background:#fee2e2;color:#991b1b}
+</style>
+</head>
+<body>
+<div class="card" id="app">
+<div class="header ok" id="head"><h2 style="margin:0">Chargement...</h2></div>
+<div class="content" id="cont">Veuillez patienter</div>
+<div class="footer">Association des Artisans de la République de Guinée<br>Agrément: 000223/MATD/VC/CAB/DRATD/2026</div>
+</div>
 <script>
-const q=new URLSearchParams(location.search).get('id')||'';
-async function go(){
- const r=await fetch('./membres.json?v='+Date.now());const list=await r.json();
- const k=q.toUpperCase().replace(/\s+/g,'');
- const m=list.find(x=> (x.id||'').toUpperCase().replace(/\s+/g,'')===k || (x.matricule||'').toUpperCase().replace(/\s+/g,'')===k || (x.serie||'')===q);
- const app=document.getElementById('app');
- if(!m){app.innerHTML=`<div class="card"><div class="top bad"><h2>CARTE NON VALIDE</h2><p>${q}</p></div><div class="info" style="text-align:center">Membre introuvable.</div></div>`;return;}
- const ph=m.photo?`./${m.photo}`:`https://ui-avatars.com/api/?name=${encodeURIComponent(m.nom)}&background=1e3a8a&color=fff&size=300`;
- app.innerHTML=`<div class="card"><div class="top ok"><img src="${ph}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(m.nom)}&background=fff&color=1e3a8a&size=300'"><h2 style="margin:8px 0">${m.nom}</h2><div>${m.fonction}</div><div style="margin-top:10px"><span class="badge ${m.statut}">${m.statut}</span></div></div><div class="info">
- <div class="line"><span class="lab">N° Série</span><span class="val">${m.serie}</span></div>
- <div class="line"><span class="lab">Matricule</span><span class="val">${m.matricule}</span></div>
- <div class="line"><span class="lab">Prénom et Nom</span><span class="val">${m.nom}</span></div>
- <div class="line"><span class="lab">Fonction</span><span class="val">${m.fonction}</span></div>
- <div class="line"><span class="lab">Statut</span><span class="val">${m.statut}</span></div>
- <div class="line"><span class="lab">Validité</span><span class="val">${m.validite}</span></div>
- <div class="line"><span class="lab">Expiré</span><span class="val">${m.expire}</span></div>
- <div class="line"><span class="lab">Contact</span><span class="val">${m.contact}</span></div>
- <div class="line"><span class="lab">Siège</span><span class="val">${m.siege}</span></div>
- <div class="line"><span class="lab">Remise</span><span class="val">${m.remise}</span></div>
- <div class="line"><span class="lab">Signature</span><span class="val">${m.signature}</span></div>
- ${m.nb?`<div style="margin-top:12px;background:#fff7ed;padding:10px;border-radius:8px;font-size:12px"><b>NB:</b> ${m.nb}</div>`:''}
- <div style="text-align:center;margin-top:15px;font-size:11px;color:#64748b">Vérifié le ${new Date().toLocaleDateString('fr-FR')}</div>
- </div><div class="foot">✅ Document officiel ARN - Conakry</div></div>`;
-}go();
-</script></body></html>
+async function run(){
+ const id = new URLSearchParams(location.search).get('id');
+ if(!id){ document.getElementById('head').innerHTML='<h2>ID manquant</h2>'; document.getElementById('head').className='header bad'; document.getElementById('cont').innerHTML='Aucun ID fourni'; return; }
+ try{
+   const res = await fetch('./membres.json?v='+Date.now());
+   const data = await res.json();
+   const m = data[id];
+   if(!m){
+     document.getElementById('head').className='header bad';
+     document.getElementById('head').innerHTML='<h2>CARTE NON TROUVEE</h2>';
+     document.getElementById('cont').innerHTML=`<div style="text-align:center;padding:20px"><span class="badge bad">INVALIDE</span><p>ID: ${id}</p><p>Cette carte n'existe pas dans la base ARN</p></div>`;
+     return;
+   }
+   document.getElementById('head').className='header ok';
+   document.getElementById('head').innerHTML='<h2>✓ CARTE AUTHENTIQUE</h2>';
+   document.getElementById('cont').innerHTML=`
+     <div style="text-align:center;margin-bottom:15px"><span class="badge ok">${m.statut.toUpperCase()} - VERIFIEE</span></div>
+     <div class="row"><b>Serie / ID:</b><span>${id}</span></div>
+     <div class="row"><b>Matricule:</b><span>${m.matricule}</span></div>
+     <div class="row"><b>Nom complet:</b><span>${m.nom}</span></div>
+     <div class="row"><b>Fonction:</b><span>${m.fonction}</span></div>
+     <div class="row"><b>Statut:</b><span>${m.statut}</span></div>
+     <div class="row"><b>Valable jusqu'au:</b><span>${m.valable}</span></div>
+     <div class="row"><b>Agrément:</b><span>${m.agrement}</span></div>
+     <div class="row"><b>Siège:</b><span>${m.siege}</span></div>
+     <div class="row"><b>Contact ARN:</b><span>${m.contact_arn}</span></div>
+     <div class="row"><b>Contact perso:</b><span>${m.contact_perso}</span></div>
+   `;
+ }catch(e){
+   document.getElementById('head').className='header bad';
+   document.getElementById('head').innerHTML='<h2>Erreur</h2>';
+   document.getElementById('cont').innerHTML='Impossible de charger membres.json - Verifie que le fichier est valide JSON sans accent. Erreur: '+e.message;
+ }
+}
+run();
+</script>
+</body>
+</html>
