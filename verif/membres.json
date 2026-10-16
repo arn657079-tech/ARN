@@ -1,1 +1,12 @@
-
+{
+  "ARN20260001": {"nom": "Fara Mbindy KAMANO","matricule": "ARN 2026 PES 0001","fonction": "president","statut": "actif","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "620761486"},
+  "ARN20260002": {"nom": "AMINATA TRAORE","matricule": "ARN 2026 VP 0002","fonction": "vice-president","statut": "active","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "623146375"},
+  "ARN20260003": {"nom": "KADIATOU SOW","matricule": "ARN 2026 SG 0003","fonction": "secretaire","statut": "active","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "623362310"},
+  "ARN20260004": {"nom": "ABDOUL GADIRI BALDE","matricule": "ARN 2026 TRS 0004","fonction": "Tresorier","statut": "actif","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "629162491"},
+  "ARN20260005": {"nom": "ROUGUIATOU DIALLO","matricule": "ARN 2026 TECH 0005","fonction": "equipe technique","statut": "active","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "626236344"},
+  "ARN20260006": {"nom": "OUMAR CONDE","matricule": "ARN 2026 TECH 0006","fonction": "equipe technique","statut": "actif","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "628332785"},
+  "ARN20260007": {"nom": "Aïssatou BAH","matricule": "ARN 2026 FORM 0007","fonction": "formatrice","statut": "active","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "626935300"},
+  "ARN20260008": {"nom": "MARIAME KINDY KOUYATE","matricule": "ARN 2026 COM 0008","fonction": "communiquant","statut": "active","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "626993237"},
+  "ARN20260009": {"nom": "MAMADOU BAILO DIOUME","matricule": "ARN 2026 FORM 0009","fonction": "formateur","statut": "actif","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "629598485"},
+  "ARN20260010": {"nom": "HADJA FANTA KOUROUMA","matricule": "ARN 2026 PROJ 0010","fonction": "charge au projet","statut": "active","valable": "28 avr. 2029","agrement": "000223/MATD/VC/CAB/DRATD/2026","siege": "soumambossia","contact_arn": "610515999","contact_perso": "624170247"}
+  }
