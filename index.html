@@ -3,28 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARN - ARN TECH</title>
+<title>Admin ARN - Alliance pour la Renaissance Nutritionnelle</title>
 <style>
-body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;text-align:center}
-header{padding:60px 20px;background:linear-gradient(135deg,#1a1a1a,#000)}
-h1{font-size:50px;margin:0;letter-spacing:5px}
-.btn{display:inline-block;margin:20px;padding:15px 30px;background:#fff;color:#000;text-decoration:none;border-radius:30px;font-weight:bold}
-section{padding:40px 20px;display:flex;flex-wrap:wrap;justify-content:center}
-.card{background:#1a1a1a;margin:15px;padding:25px;border-radius:15px;width:280px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f0f4f8}
+header{background:white;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px}
+.logo img{height:52px;width:52px;border-radius:50%;border:2px solid #0a4da1;object-fit:cover}
+.logo-text b{color:#0a4da1;font-size:13px;line-height:1.1;display:block}
+.logo-text span{color:#1a8a3a;font-size:10px;font-weight:bold}
+.boite{max-width:1000px;margin:15px auto;background:white;padding:18px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+.cache{display:none}
+input,select,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc;font-size:14px;box-sizing:border-box}
+button{font-weight:bold;border:none;cursor:pointer}
+.btn-bleu{background:#0a4da1;color:white}
+.btn-vert{background:#1a8a3a;color:white}
+.btn-rouge{background:#c1272d;color:white}
+.btn-orange{background:#e67e22;color:white}
+.grille{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.carte-stat{padding:15px;border-radius:10px;text-align:center;color:white;font-weight:bold}
+.carte-stat b{font-size:22px;display:block}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+th,td{border:1px solid #ddd;padding:8px;text-align:left}
+th{background:#0a4da1;color:white}
+.badge{padding:3px 8px;border-radius:12px;font-size:11px;color:white}
+.badge-v{background:#1a8a3a} .badge-a{background:#e67e22}
 </style>
 </head>
 <body>
+
+<div id="connexion" class="boite" style="max-width:400px;margin-top:60px;text-align:center">
+<img src="logo.png" style="height:90px;width:90px;border-radius:50%;border:3px solid #0a4da1">
+<h2 style="color:#0a4da1;margin:10px 0">Administration ARN</h2>
+<p style="font-size:12px;color:#555">Alliance pour la Renaissance Nutritionnelle<br>Là où commence la vie, nous agissons.</p>
+<input type="password" id="mdp" placeholder="Mot de passe admin">
+<button class="btn-bleu" onclick="connecter()">Se connecter</button>
+<p style="font-size:11px;color:#888;margin-top:8px">Mot de passe: ARN2026</p>
+<a href="index.html" style="font-size:12px;color:#0a4da1;display:block;margin-top:10px">← Retour au site</a>
+</div>
+
+<div id="admin" class="cache">
 <header>
-<h1>ARN</h1>
-<p>ARN TECH - Solutions Numériques & Innovation</p>
-<p>Conakry, Guinée - Votre partenaire digital</p>
-<a class="btn" href="https://wa.me/224000000000">Nous Contacter sur WhatsApp</a>
+<div class="logo"><img src="logo.png"><div class="logo-text"><b>Alliance pour la<br>Renaissance Nutritionnelle</b><span>ADMIN ARN - FORMER • ACCOMPAGNER • IMPACTER</span></div></div>
+<button class="btn-rouge" style="width:auto;padding:8px 12px" onclick="deconnecter()">Déconnexion</button>
 </header>
-<section>
-<div class="card"><h3>🚀 Nos Services</h3><p>Création de sites web, design, marketing digital</p></div>
-<div class="card"><h3>📍 Localisation</h3><p>Basé à Conakry, disponible partout en Guinée</p></div>
-<div class="card"><h3>📧 Contact</h3><p>Contactez-nous pour un devis gratuit</p></div>
-</section>
-<footer style="padding:20px;background:#000"><p>© 2026 ARN TECH - Tous droits réservés</p></footer>
+
+<div class="boite">
+<h3 style="color:#0a4da1">📊 Tableau de bord ARN Nutrition</h3>
+<div class="grille" style="margin-top:10px">
+<div class="carte-stat" style="background:#0a4da1">Total Attestations<b id="total">0</b></div>
+<div class="carte-stat" style="background:#1a8a3a">Vérifiés<b id="verif">0</b></div>
+<div class="carte-stat" style="background:#e67e22">En attente<b id="attente">0</b></div>
+</div>
+</div>
+
+<div class="boite">
+<h3 style="color:#1a8a3a">➕ Ajouter / Modifier une attestation ARN</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<input id="id_arn" placeholder="ID ARN ex: ARN20260006">
+<input id="nom" placeholder="Nom complet">
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<input id="formation" placeholder="Formation / Spécialité Nutritionnelle">
+<select id="statut"><option>Vérifié</option><option>En attente</option><option>Suspendu</option></select>
+</div>
+<input id="date" type="date">
+<textarea id="details" placeholder="Détails supplémentaires (ex: module nutrition, durée...)"></textarea>
+<button class="btn-vert" onclick="ajouter()">✅ Ajouter l'attestation ARN</button>
+<p id="msg" style="font-size:13px;margin-top:8px"></p>
+<div id="codeGen" class="cache" style="margin-top:10px;background:#f0f8ff;padding:12px;border-radius:8px;border:1px dashed #0a4da1">
+<b>Code à copier pour la vérification :</b><br>
+<small>Crée un fichier dans <b>verif/</b> avec ce contenu :</small>
+<pre id="preCode" style="background:white;padding:8px;margin-top:8px;font-size:11px;overflow:auto;white-space:pre-wrap"></pre>
+</div>
+</div>
+
+<div class="boite">
+<h3 style="color:#0a4da1">📋 Liste des membres / attestations ARN</h3>
+<input id="recherche" placeholder="🔍 Rechercher par ID ou nom..." onkeyup="filtrer()">
+<table>
+<thead><tr><th>ID ARN</th><th>Nom</th><th>Formation</th><th>Statut</th><th>Lien Vérif</th><th>Action</th></tr></thead>
+<tbody id="liste"></tbody>
+</table>
+</div>
+
+<div class="boite" style="text-align:center">
+<a href="index.html" class="btn-bleu" style="display:inline-block;width:auto;padding:10px 20px;text-decoration:none">Voir le site public ARN</a>
+<a href="verif/?id=ARN20260005" target="_blank" class="btn-orange" style="display:inline-block;width:auto;padding:10px 20px;text-decoration:none;margin-left:8px">Tester vérification</a>
+</div>
+
+</div>
+
+<script>
+let membres=JSON.parse(localStorage.getItem('arn_membres_v2')||'[{"id":"ARN20260005","nom":"FARA MBINDY KAMANO","formation":"Nutritionniste - Diététique Avancée","statut":"Vérifié","date":"2026-09-10"}]');
+function connecter(){
+ if(document.getElementById('mdp').value==='ARN2026'){
+  document.getElementById('connexion').classList.add('cache');
+  document.getElementById('admin').classList.remove('cache');
+  afficher();
+ }else alert('Mot de passe incorrect - ARN2026');
+}
+function deconnecter(){
+ document.getElementById('admin').classList.add('cache');
+ document.getElementById('connexion').classList.remove('cache');
+ document.getElementById('mdp').value='';
+}
+function afficher(){
+ let tbody=document.getElementById('liste');tbody.innerHTML='';
+ membres.forEach((m,i)=>{
+  let badge=m.statut==='Vérifié'?'<span class="badge badge-v">Vérifié</span>':'<span class="badge badge-a">'+m.statut+'</span>';
+  tbody.innerHTML+=`<tr><td><b>${m.id}</b></td><td>${m.nom}</td><td>${m.formation}</td><td>${badge}</td><td><a href="verif/?id=${m.id}" target="_blank" style="color:#0a4da1;font-size:11px">verif/?id=${m.id}</a></td><td><button class="btn-rouge" style="padding:5px 8px;font-size:11px" onclick="supprimer(${i})">Supprimer</button></td></tr>`;
+ });
+ document.getElementById('total').innerText=membres.length;
+ document.getElementById('verif').innerText=membres.filter(m=>m.statut==='Vérifié').length;
+ document.getElementById('attente').innerText=membres.filter(m=>m.statut!=='Vérifié').length;
+ localStorage.setItem('arn_membres_v2',JSON.stringify(membres));
+}
+function ajouter(){
+ let id=document.getElementById('id_arn').value.trim();
+ let nom=document.getElementById('nom').value.trim();
+ let form=document.getElementById('formation').value.trim();
+ let statut=document.getElementById('statut').value;
+ let date=document.getElementById('date').value;
+ if(!id||!nom){alert('Remplis ID ARN et Nom');return;}
+ membres.push({id,nom,formation:form,statut,date});
+ document.getElementById('msg').innerHTML=`✅ <b>${id}</b> - ${nom} ajouté avec succès ! Lien : <a href="verif/?id=${id}" target="_blank">verif/?id=${id}</a>`;
+ let code=`ID: ${id}\nNom: ${nom}\nFormation: ${form}\nStatut: ${statut}\nDate: ${date}\n\nPour activer la vérification publique, crée un dossier ${id} dans verif/ ou ajoute ${id} dans ton fichier verif/index.html`;
+ document.getElementById('preCode').innerText=code;
+ document.getElementById('codeGen').classList.remove('cache');
+ afficher();
+ document.getElementById('id_arn').value='';document.getElementById('nom').value='';document.getElementById('formation').value='';
+}
+function supprimer(i){if(confirm('Supprimer cette attestation ARN ?')){membres.splice(i,1);afficher();}}
+function filtrer(){
+ let q=document.getElementById('recherche').value.toLowerCase();
+ document.querySelectorAll('#liste tr').forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?'':'none'});
+}
+</script>
 </body>
   </html>
