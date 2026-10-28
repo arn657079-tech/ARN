@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARN - Nutritionniste Officiel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f8fafc}
+header{background:#fff;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:100}
+.logo-left{width:65px;height:65px;border-radius:50%;border:2px solid #16a34a;overflow:hidden}
+.logo-left img{width:100%}
+.logo-center{font-weight:bold;text-align:center;line-height:1.1}
+.logo-center b{color:#16a34a}
+.menu-icon{font-size:28px;cursor:pointer;padding:8px}
+.menu{position:absolute;top:80px;right:10px;background:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.2);display:none;min-width:210px;z-index:200}
+.menu div{padding:14px;border-bottom:1px solid #eee;cursor:pointer}
+.hero{height:260px;background:linear-gradient(rgba(22,163,74,.65),rgba(22,163,74,.65)),url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800') center/cover;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;padding:15px}
+.slogan-box{border:3px solid #16a34a;border-radius:14px;background:#fff;margin:15px;padding:22px 10px 15px 10px;position:relative;text-align:center}
+.slogan-icon{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.slogan-box h3{color:#16a34a;font-style:italic;font-size:18px;line-height:1.4}
+.slogan-box p{color:#dc2626;font-weight:bold;margin-top:5px;font-size:13px}
+.btn-ps{width:90%;margin:10px auto;display:block;padding:14px;border-radius:8px;font-weight:bold;text-align:center;cursor:pointer;font-size:15px}
+.btn-white{background:#fff;border:2px solid #16a34a;color:#16a34a}
+.btn-green{background:#16a34a;color:#fff;border:2px solid #16a34a}
+.btn-grey{background:#fff;border:2px solid #666;color:#666}
+.card{width:94%;margin:12px auto;background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.08);display:none}
+.card input,.card select,.card textarea{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:6px}
+.msg{padding:10px;border-radius:6px;margin:8px 0;text-align:center;display:none;font-weight:bold}
+.success{background:#dcfce7;color:#166534;display:block}
+.error{background:#fee2e2;color:#991b1b;display:block}
+.dashboard{display:none;background:#fff;min-height:100vh}
+.dash-header{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;padding:18px;text-align:center}
+.dash-header h2{font-size:20px;text-transform:uppercase}
+.dash-header p{font-size:13px;opacity:.9}
+.dash-item{display:flex;align-items:center;gap:14px;padding:15px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.dash-item:hover{background:#f0fdf4}
+.dash-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff}
+.section-card{margin:12px;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.section-header{padding:12px;text-align:center;color:#fff;font-weight:bold;font-size:17px}
+.section-card img{width:100%;height:170px;object-fit:cover}
+.section-card p{padding:10px;color:#555;font-size:13px}
+.quote{background:#f0fdf4;padding:20px;text-align:center;border-top:3px solid #16a34a}
+.profile-dropdown{position:absolute;top:80px;right:10px;background:#fff;border-radius:8px;box-shadow:0 5px 20px rgba(0,0,0,.2);display:none;min-width:220px;z-index:200}
+.profile-dropdown div{padding:12px 15px;border-bottom:1px solid #eee;display:flex;gap:10px;align-items:center;cursor:pointer}
+.mat-item{display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid #eee;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo-left"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Coat_of_arms_of_Guinea.svg/120px-Coat_of_arms_of_Guinea.svg.png"></div>
+<div class="logo-center"><div style="font-size:22px">🥗</div><b>ARN</b><br><small style="font-size:11px;color:#16a34a">Alliance Nutrition<br>Médecins & Nutritionnistes</small></div>
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+<div id="menuBox" class="menu">
+<div onclick="goHome()">🏠 Accueil</div>
+<div onclick="showPage('creation')">➕ Créer compte Patient</div>
+<div onclick="showPage('connexion')">🔑 Se connecter</div>
+<div onclick="showPage('admin')">⚙️ ADMIN Matricules</div>
+</div>
+<div id="profileBox" class="profile-dropdown">
+<div style="display:block;text-align:center"><b id="pNameDrop">Patient</b><br><small id="pEmailDrop"></small></div>
+<div onclick="showProfile()">👤 Mon Dossier</div>
+<div onclick="alert('Modif MDP à venir')">🔒 Modifier mot de passe</div>
+<div onclick="deconnecter()">⏻ Déconnexion</div>
+</div>
+</header>
+
+<div id="accueil">
+<div class="hero"><div><h2 style="font-size:26px">Bienvenue à l'ARN</h2><p style="margin-top:8px;font-size:16px">Demain Nutritionniste avec les Médecins<br>10.000.000 places - Nutrition pour tous</p></div></div>
+
+<div class="slogan-box">
+<div class="slogan-icon">🥗</div>
+<h3>"ARN là où commence la vie,<br>nous agissons"</h3>
+<p>Consultations Nutritionnistes & Médecins - Session 2026</p>
+</div>
+
+<button class="btn-ps btn-white" onclick="showPage('creation')">🥗 CRÉER UN COMPTE PATIENT ARN</button>
+<button class="btn-ps btn-green" onclick="showPage('connexion')">🔑 SE CONNECTER - DOSSIER PATIENT</button>
+<button class="btn-ps btn-grey" onclick="alert('Guide ARN Nutrition: 1-Crée ton compte avec matricule ARN-2026-NUTR-0001 2-Connecte toi 3-Prends RDV avec nutritionniste')">📄 Guide d'utilisation Nutrition</button>
+<button class="btn-ps btn-grey" onclick="alert('FAQ: Matricule format ARN-2026-NUTR-0001 avec 3 tirets autorisé. Contact ADMIN si bloqué')">❓ FAQ Nutritionniste</button>
+
+<div style="padding:12px">
+<div class="section-card"><div class="section-header" style="background:#16a34a">Consultation Nutritionniste</div><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600"><p>Bilan nutritionnel complet avec nos médecins nutritionnistes diplômés.</p></div>
+<div class="section-card"><div class="section-header" style="background:#0d6efd">Dossier Patient</div><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600"><p>Votre dossier médical nutritionnel sécurisé et suivi personnalisé.</p></div>
+<div class="section-card"><div class="section-header" style="background:#ea580c">Plan Alimentaire</div><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600"><p>Plans alimentaires adaptés par nos nutritionnistes pour votre santé.</p></div>
+</div>
+
+<div class="quote">
+<p style="color:#166534;font-style:italic">"La nutrition est la première médecine. Ensemble, médecins et nutritionnistes, nous bâtissons la renaissance nutritionnelle de la Guinée."</p>
+<b style="color:#000">Direction ARN<br>Alliance pour la Renaissance Nutritionnelle</b>
+<div style="margin-top:15px;color:#888;font-size:11px">Powered by <span style="color:#16a34a">ARN Nutrition @ 2026</span></div>
+</div>
+</div>
+
+<!-- CREATION COMPTE -->
+<div id="creation" class="card">
+<h3 style="color:#16a34a">🥗 Créer votre Dossier Patient ARN</h3>
+<div id="msgCrea" class="msg"></div>
+<input id="matricule" placeholder="Matricule: ARN-2026-NUTR-0001 (3 tirets OK)">
+<input id="nom" placeholder="Nom de famille">
+<input id="prenom" placeholder="Prénom(s)">
+<input id="email" placeholder="Email">
+<input id="mdp" type="password" placeholder="Mot de passe">
+<select id="filiere"><option value="">Motif Consultation</option><option>Consultation Nutritionniste</option><option>Suivi avec Médecin</option><option>Bilan Nutritionnel</option><option>Plan Alimentaire</option><option>Suivi Poids / Diabète</option><option>Conseil Diététique</option></select>
+<input id="centre" placeholder="Centre de santé / Ville">
+<textarea id="antecedent" rows="2" placeholder="Antécédents médicaux (optionnel)"></textarea>
+<button class="btn-ps btn-green" onclick="creerCompte()">Créer mon dossier patient</button>
+<button class="btn-ps btn-grey" onclick="goHome()">← Accueil</button>
+</div>
+
+<div id="connexion" class="card">
+<h3 style="color:#16a34a">🔑 Connexion Dossier Patient</h3>
+<div id="msgConn" class="msg"></div>
+<input id="matConn" placeholder="Matricule ARN-2026-NUTR-0001">
+<input id="mdpConn" type="password" placeholder="Mot de passe">
+<div style="text-align:right"><a href="#" style="color:#16a34a;font-size:13px">Mot de passe oublié? Contacter nutritionniste</a></div>
+<button class="btn-ps btn-green" onclick="seConnecter()">Accéder à mon dossier</button>
+<button class="btn-ps btn-grey" onclick="goHome()">← Accueil</button>
+</div>
+
+<!-- DASHBOARD NUTRITIONNISTE -->
+<div id="dashboard" class="dashboard">
+<div class="dash-header">
+<h2 id="dashNom">Patient ARN</h2>
+<p id="dashEmail">Dossier Nutritionniste</p>
+<small id="dashMat" style="background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;margin-top:5px;display:inline-block"></small>
+</div>
+
+<div class="dash-item" onclick="alert('Bilan Nutritionnel: RDV demain avec nutritionniste + médecin')"><div class="dash-icon" style="background:#16a34a">🥗</div><div><b>Bilan Nutritionnel</b><br><small>Consultation avec nutritionniste & médecin</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#0d6efd">📋</div><div><b>Dossier Patient</b><br><small>Vos infos médicales & nutritionnelles</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#f59e0b">🍎</div><div><b>Plan Alimentaire</b><br><small>Repas personnalisés par nutritionniste</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#dc2626">📊</div><div><b>Suivi Poids & Courbes</b><br><small>Évolution poids, IMC, analyses</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#8b5cf6">👨‍⚕️</div><div><b>Rendez-vous Médecins</b><br><small>Prendre RDV avec médecin nutritionniste</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#06b6d4">📄</div><div><b>Documents Médicaux</b><br><small>Ordonnances, bilans, analyses</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#ec4899">🍲</div><div><b>Recettes & Conseils</b><br><small>Recettes santé par nos nutritionnistes</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#16a34a">💬</div><div><b>Chat Nutritionniste</b><br><small>Posez vos questions 24h/24</small></div></div>
+<div class="dash-item"><div class="dash-icon" style="background:#6366f1">🛡️</div><div><b>Assurance Santé</b><br><small>Couverture nutrition</small></div></div>
+
+<div style="padding:12px">
+<div class="section-card"><div class="section-header" style="background:#16a34a">Consultation du Jour - Demain</div><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600"><p><b>Demain : Journée Nutritionniste avec les Médecins</b><br>Tous les patients ARN sont attendus pour bilan gratuit.</p></div>
+<div class="section-card"><div class="section-header" style="background:#0d6efd">Relevés & Analyses</div><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600"><p>Vos relevés nutritionnels et analyses médicales.</p></div>
+<div class="section-card"><div class="section-header" style="background:#f59e0b">Insertion Socio-professionnelle Nutrition</div><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600"><p>Devenez nutritionniste, formez-vous avec l'ARN.</p></div>
+</div>
+</div>
+
+<div id="profil" class="card">
+<h3>Mon Dossier Patient</h3>
+<p id="pInfo"></p>
+<button class="btn-ps btn-grey" onclick="deconnecter()">Déconnexion</button>
+<button class="btn-ps btn-green" onclick="goHome()">🏠 Accueil</button>
+</div>
+
+<div id="admin" class="card">
+<h3 style="color:#16a34a">⚙️ ADMIN - Matricules Nutrition ARN</h3>
+<div id="msgAdmin" class="msg"></div>
+<div style="background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #16a34a;margin-bottom:10px">
+<b>Ajouter 1 patient (matricule) :</b>
+<div style="display:flex;gap:5px;margin-top:5px"><input id="addOneMat" placeholder="ARN-2026-NUTR-0001"><button style="background:#16a34a;color:#fff;border:none;padding:8px 12px;border-radius:6px;font-weight:bold" onclick="ajouterUn()">➕ Ajouter</button></div>
+</div>
+<div style="display:flex;gap:5px"><input id="searchMat" placeholder="🔍 Chercher patient..." oninput="refreshAdmin()"><button style="background:#16a34a;color:#fff;border:none;padding:8px 12px;border-radius:6px;font-weight:bold" onclick="generer1000()">Générer 1-1000</button></div>
+<div style="display:flex;justify-content:space-between;margin:10px 0"><span>Mode: <b id="modeActuel">LIBRE</b></span><span>Total: <b id="totalMat">0</b></span></div>
+<div id="listeAffichee" style="max-height:350px;overflow:auto;border:1px solid #ddd;border-radius:8px"></div>
+<textarea id="listeMat" rows="2" placeholder="Coller plusieurs matricules ARN-2026-NUTR-XXXX"></textarea>
+<button class="btn-ps btn-green" onclick="sauverListe()">💾 Sauver liste</button>
+<button class="btn-ps" style="background:#dc2626;color:#fff;border:none" onclick="viderListe()">🗑️ Vider</button>
+<button class="btn-ps btn-grey" onclick="goHome()">🏠 Accueil</button>
+</div>
+
+<script>
+var comptes=JSON.parse(localStorage.getItem('comptesARN_V2')||'[]');
+var listeAutorisee=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');
+function toggleMenu(){var m=document.getElementById('menuBox');var p=document.getElementById('profileBox');if(document.getElementById('dashboard').style.display==='block'){p.style.display=p.style.display==='block'?'none':'block';m.style.display='none'}else{m.style.display=m.style.display==='block'?'none':'block';p.style.display='none'}}
+function goHome(){document.getElementById('menuBox').style.display='none';document.getElementById('profileBox').style.display='none';['creation','connexion','profil','admin','dashboard'].forEach(function(id){document.getElementById(id).style.display='none'});document.getElementById('accueil').style.display='block';}
+function showPage(id){document.getElementById('menuBox').style.display='none';document.getElementById('profileBox').style.display='none';document.getElementById('accueil').style.display='none';['creation','connexion','profil','admin','dashboard'].forEach(function(k){document.getElementById(k).style.display='none'});document.getElementById(id).style.display='block';if(id==='admin')refreshAdmin();}
+function showMsg(id,txt,ok){var e=document.getElementById(id);e.textContent=txt;e.className='msg '+(ok?'success':'error');e.style.display='block';setTimeout(function(){e.style.display='none'},3500);}
+function normaliserMat(m){return m.trim().toUpperCase().replace(/\s+/g,'-').replace(/--+/g,'-');}
+function estFormatValide(m){return /^ARN-\d{4}(-[A-Z]+)*-\d{1,8}$/.test(m);}
+function ajouterUn(){var i=document.getElementById('addOneMat');var mat=normaliserMat(i.value);if(!mat||!estFormatValide(mat)){showMsg('msgAdmin','Format invalide ex: ARN-2026-NUTR-0001',false);return}if(listeAutorisee.indexOf(mat)!==-1){showMsg('msgAdmin','Déjà dans liste',false);return}listeAutorisee.push(mat);listeAutorisee.sort();localStorage.setItem('listeMatriculesARN',JSON.stringify(listeAutorisee));i.value='';showMsg('msgAdmin','Ajouté: '+mat,true);refreshAdmin();}
+function supprimerUn(mat){if(!confirm('Retirer le patient '+mat+' ?'))return;listeAutorisee=listeAutorisee.filter(function(x){return x!==mat});localStorage.setItem('listeMatriculesARN',JSON.stringify(listeAutorisee));showMsg('msgAdmin','Retiré: '+mat,true);refreshAdmin();}
+function generer1000(){if(!confirm('Générer 1 à 1000 pour nutritionnistes?'))return;var a=[];for(var i=1;i<=1000;i++)a.push('ARN-2026-NUTR-'+String(i).padStart(4,'0'));var s={};listeAutorisee.forEach(function(x){s[x]=1});a.forEach(function(x){s[x]=1});listeAutorisee=Object.keys(s).sort();localStorage.setItem('listeMatriculesARN',JSON.stringify(listeAutorisee));showMsg('msgAdmin','1000 patients générés',true);refreshAdmin();}
+function sauverListe(){var t=document.getElementById('listeMat').value;var l=t.split('\n').map(normaliserMat).filter(function(x){return x&&estFormatValide(x)});if(!l.length){showMsg('msgAdmin','Aucun valide',false);return}var s={};listeAutorisee.forEach(function(x){s[x]=1});l.forEach(function(x){s[x]=1});listeAutorisee=Object.keys(s).sort();localStorage.setItem('listeMatriculesARN',JSON.stringify(listeAutorisee));document.getElementById('listeMat').value='';showMsg('msgAdmin',l.length+' ajoutés',true);refreshAdmin();}
+function viderListe(){if(!confirm('Vider toute la liste patients?'))return;listeAutorisee=[];localStorage.removeItem('listeMatriculesARN');refreshAdmin();}
+function estAutorise(m){m=normaliserMat(m);if(!estFormatValide(m))return{ok:false,raison:'Format invalide ex: ARN-2026-NUTR-0001'};if(!listeAutorisee.length)return{ok:true};if(listeAutorisee.indexOf(m)!==-1)return{ok:true};return{ok:false,raison:'Matricule non autorisé par ADMIN Nutritionniste'}} 
+function creerCompte(){var mat=normaliserMat(document.getElementById('matricule').value);var chk=estAutorise(mat);if(!chk.ok){showMsg('msgCrea',chk.raison,false);return}if(comptes.find(function(c){return c.matricule===mat})){showMsg('msgCrea','Compte existe déjà',false);return}var nom=document.getElementById('nom').value.trim(),prenom=document.getElementById('prenom').value.trim(),email=document.getElementById('email').value.trim(),mdp=document.getElementById('mdp').value;if(!nom||!prenom||!email||!mdp){showMsg('msgCrea','Remplis tous les champs',false);return}comptes.push({matricule:mat,nom:nom,prenom:prenom,email:email,password:mdp,filiere:document.getElementById('filiere').value,centre:document.getElementById('centre').value,antecedent:document.getElementById('antecedent').value});localStorage.setItem('comptesARN_V2',JSON.stringify(comptes));showMsg('msgCrea','Dossier patient créé: '+mat,true);}
+function seConnecter(){var mat=normaliserMat(document.getElementById('matConn').value);var mdp=document.getElementById('mdpConn').value;var c=comptes.find(function(x){return x.matricule===mat&&x.password===mdp});if(!c){showMsg('msgConn','Matricule ou MDP incorrect',false);return}localStorage.setItem('sessionARN',JSON.stringify(c));afficherDashboard(c);}
+function afficherDashboard(c){document.getElementById('accueil').style.display='none';document.getElementById('creation').style.display='none';document.getElementById('connexion').style.display='none';document.getElementById('admin').style.display='none';document.getElementById('profil').style.display='none';document.getElementById('dashboard').style.display='block';document.getElementById('dashNom').textContent=c.prenom+' '+c.nom;document.getElementById('dashEmail').textContent=c.email;document.getElementById('dashMat').textContent=c.matricule;document.getElementById('pNameDrop').textContent=c.prenom+' '+c.nom;document.getElementById('pEmailDrop').textContent=c.email;document.getElementById('pInfo').innerHTML='<b>'+c.prenom+' '+c.nom+'</b><br>Matricule: '+c.matricule+'<br>Email: '+c.email+'<br>Motif: '+(c.filiere||'-')+'<br>Centre: '+(c.centre||'-');}
+function showProfile(){var s=localStorage.getItem('sessionARN');if(s){var c=JSON.parse(s);document.getElementById('dashboard').style.display='none';document.getElementById('profil').style.display='block';}}
+function deconnecter(){localStorage.removeItem('sessionARN');goHome();}
+function refreshAdmin(){var s=(document.getElementById('searchMat').value||'').toUpperCase();var f=listeAutorisee.filter(function(m){return m.indexOf(s)!==-1});document.getElementById('totalMat').textContent=listeAutorisee.length;document.getElementById('modeActuel').textContent=listeAutorisee.length?'RESTREINT':'LIBRE';var h='';if(!f.length)h='<div style="padding:20px;text-align:center;color:#99
