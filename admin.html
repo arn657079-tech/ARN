@@ -2,20 +2,69 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Administration ARN</title>
 <style>
-body{font-family:Arial;padding:20px;background:#0f172a;color:white}
-.boite{max-width:500px;margin:30px auto;background:white;color:black;padding:20px;border-radius:12px}
-input,button{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
-button{background:#0d6efd;color:white;font-weight:bold;border:none}
+body{font-family:Arial;padding:12px;background:#f8fafc}
+.boite{max-width:520px;margin:10px auto;background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+input,textarea,button{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{background:#2563eb;color:#fff;border:none;font-weight:bold;cursor:pointer}
+.btn-rouge{background:#dc2626}
+.btn-vert{background:#16a34a}
+.btn-gris{background:#e5e7eb;color:#333}
+.mat-ligne{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;background:#fff}
 </style>
 </head>
 <body>
-<div class="boite">
+<div class="boite" id="loginBox">
 <h2>Administration ARN</h2>
-<p>Entre le mot de passe</p>
+<p>Entre le mot de passe ADMIN</p>
 <input type="password" id="mdp" placeholder="Mot de passe">
-<button onclick="if(document.getElementById('mdp').value=='ARN2026'){alert('Connecté avec succès !')}else{alert('Mauvais mot de passe')}">Se connecter</button>
+<button onclick="if(document.getElementById('mdp').value==='ARN2026'){document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';filtrerListe()}else{alert('Mot de passe faux')}">Entrer</button>
 </div>
+
+<div class="boite" id="adminBox" style="display:none">
+<h2 style="text-align:center;color:#1e40af">ADMIN - Gestion Matricules</h2>
+
+<div style="background:#eff6ff;padding:12px;border-radius:10px;border:1px solid #93c5fd">
+<b>1. INSÉRER un matricule :</b>
+<div style="display:flex;gap:6px;margin-top:8px">
+<input id="addOneMat" placeholder="ARN-2026-PRES-0001" style="margin:0">
+<button onclick="ajouterUn()" style="width:110px;margin:0">➕ Ajouter</button>
+</div>
+</div>
+
+<div style="background:#f0fdf4;padding:12px;border-radius:10px;border:1px solid #86efac;margin-top:12px">
+<b>2. RECHERCHER pour SUPPRIMER :</b>
+<input id="searchMat" placeholder="🔍 Tape pour chercher... ex: PRES-0001" oninput="filtrerListe()" style="margin-top:8px">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-top:8px"><span>Total: <b id="totalMat">0</b></span><span>Trouvés: <b id="totalFiltre">0</b></span></div>
+</div>
+
+<div id="listeAffichee" style="max-height:380px;overflow:auto;border:1px solid #ddd;border-radius:10px;margin-top:12px"></div>
+
+<div style="margin-top:14px">
+<b>3. Coller plusieurs :</b>
+<textarea id="listeMat" rows="3" placeholder="ARN-2026-0001&#10;ARN-2026-PRES-0001"></textarea>
+<button onclick="sauverListe()">💾 Sauver la liste collée</button>
+</div>
+
+<div style="display:flex;gap:6px;margin-top:10px">
+<button onclick="generer1000()" class="btn-vert" style="flex:1">Générer 1-1000</button>
+<button onclick="viderListe()" class="btn-rouge" style="flex:1">🗑️ Vider tout</button>
+</div>
+<a href="index.html"><button class="btn-gris">🏠 Retour Accueil</button></a>
+</div>
+
+<script>
+var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');
+function norm(m){return m.trim().toUpperCase().replace(/\s+/g,'-').replace(/--+/g,'-')}
+function valide(m){return /^ARN-\d{4}(-[A-Z]+)*-\d{1,8}$/.test(m)}
+function ajouterUn(){var i=document.getElementById('addOneMat');var mat=norm(i.value);if(!mat||!valide(mat)){alert('Format invalide. Ex: ARN-2026-PRES-0001');return}if(liste.includes(mat)){alert('Existe déjà');return}liste.push(mat);liste.sort();localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));i.value='';filtrerListe()}
+function supprimerUn(mat){if(!confirm('SUPPRIMER ce matricule ?\n'+mat))return;liste=liste.filter(x=>x!==mat);localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));filtrerListe()}
+function filtrerListe(){var q=(document.getElementById('searchMat').value||'').toUpperCase();var f=liste.filter(m=>m.includes(q));document.getElementById('totalMat').textContent=liste.length;document.getElementById('totalFiltre').textContent=f.length;var h='';if(!f.length)h='<div style="padding:25px;text-align:center;color:#999">Aucun résultat</div>';else f.slice(0,500).forEach(m=>{h+=`<div class="mat-ligne"><b style="font-size:13px">${m}</b><button onclick="supprimerUn('${m}')" style="width:auto;background:#fee2e2;color:#dc2626;border:1px solid #fecaca;padding:6px 12px;border-radius:6px">❌ Supprimer</button></div>`});document.getElementById('listeAffichee').innerHTML=h}
+function generer1000(){if(!confirm('Générer 1 à 1000 ?'))return;var a=[];for(var i=1;i<=1000;i++)a.push('ARN-2026-'+String(i).padStart(4,'0'));var s={};liste.forEach(x=>s[x]=1);a.forEach(x=>s[x]=1);liste=Object.keys(s).sort();localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));filtrerListe()}
+function sauverListe(){var t=document.getElementById('listeMat').value;var l=t.split('\n').map(norm).filter(x=>x&&valide(x));if(!l.length){alert('Aucun valide');return}var s={};liste.forEach(x=>s[x]=1);l.forEach(x=>s[x]=1);liste=Object.keys(s).sort();localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));document.getElementById('listeMat').value='';filtrerListe();alert(l.length+' ajoutés')}
+function viderListe(){if(!confirm('Vider toute la liste ?'))return;liste=[];localStorage.removeItem('listeMatriculesARN');filtrerListe()}
+</script>
 </body>
-</html>
+  </html>
