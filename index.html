@@ -2,103 +2,114 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ARN - Alliance pour la Renaissance Nutritionnelle</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#f5f6f8}
-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#fff;position:sticky;top:0;box-shadow:0 2px 6px rgba(0,0,0,.1);z-index:10}
-.logo{display:flex;align-items:center;gap:8px}
-.logo-icon{width:50px;height:50px;background:#0d47a1;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;border:2px solid #0d47a1}
-.logo b{color:#0d47a1;font-size:11px;display:block;line-height:1.1}
-.logo i{color:#2e7d32;font-size:8px;font-style:normal;font-weight:700}
-.hero{height:260px;background:url('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=900') center/cover}
-.alert{margin:-18px 14px 18px;background:#fff;border:2px solid #ff9800;border-radius:12px;padding:16px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
-.alert p{color:#b71c1c;font-weight:700;font-style:italic;font-size:13px;line-height:1.4}
-.btns{padding:0 14px;display:flex;flex-direction:column;gap:9px;max-width:420px;margin:0 auto 16px}
-.btn{padding:12px;border-radius:8px;font-weight:700;border:2px solid;font-size:13px;text-align:center;display:block;text-decoration:none;cursor:pointer}
-.o{border-color:#0d47a1;color:#0d47a1;background:#fff}
-.bl{background:#0d47a1;color:#fff;border-color:#0d47a1}
-.gr{border-color:#999;color:#666;background:#fff}
-.gn{background:#2e7d32;color:#fff;border-color:#2e7d32}
-.cit{background:#fff8e1;padding:20px 14px;color:#666;font-style:italic;font-size:13px;line-height:1.5;border-top:1px solid #ffe082}
-.cit b{display:block;text-align:right;color:#222;margin-top:8px;font-style:normal;font-size:11px}
-#login{display:none;position:fixed;inset:0;background:#fff;z-index:9999;flex-direction:column}
-#espace{display:none;min-height:100vh;background:#f2f3f5}
-.top{background:#fff;padding:14px;text-align:center;border-bottom:1px solid #eee}
-.top h2{color:#ef6c00;font-size:17px}
-.menu{background:#fff}
-.menu div{padding:15px 14px;border-bottom:1px solid #eee;font-size:14px;cursor:pointer}
-.menu div:active{background:#f5f5f5}
-.menu .v{background:#e8f5e9;color:#2e7d32;font-weight:700}
-.cards{display:none}
-.wel{height:160px;background:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900') center/cover;position:relative}
-.wel span{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;text-align:center;font-weight:700}
-.card{margin:12px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.card-t{padding:10px;text-align:center;color:#fff;font-weight:800;font-size:13px}
-.card img{width:100%;height:160px;object-fit:cover;display:block}
-.card-p{padding:10px;font-size:12px;color:#555}
+header{background:#fff;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #0d4aa5}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:50px;height:50px;background:#0d4aa5;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.hero{height:220px;background:url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800') center/cover}
+.alert{border:2px solid orange;border-radius:12px;padding:15px;margin:15px;text-align:center;color:#b91c1c;font-weight:bold;background:#fff}
+.btn{display:block;width:90%;margin:10px auto;padding:14px;border-radius:10px;font-weight:bold;text-align:center;cursor:pointer}
+.btn-outline{border:2px solid #0d4aa5;color:#0d4aa5;background:#fff}
+.btn-blue{background:#0d4aa5;color:#fff;border:none}
+.btn-grey{background:#f3f3f3;border:1px solid #ccc}
+.btn-green{background:#16a34a;color:#fff;border:none}
+.form{width:90%;margin:15px auto;display:none;background:#fff;padding:15px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+.form input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px}
+.msg{padding:10px;border-radius:6px;margin:8px 0;text-align:center;display:none}
+.success{background:#dcfce7;color:#166534}
+.error{background:#fee2e2;color:#991b1b}
 </style>
 </head>
 <body>
-<div id="accueil">
-<header><div class="logo"><div class="logo-icon">ARN</div><div><b>Alliance pour la<br>Renaissance<br>Nutritionnelle</b><i>FORMER • ACCOMPAGNER • IMPACTER</i></div></div><div style="font-size:24px">☰</div></header>
+
+<header>
+<div class="logo"><div class="logo-icon">ARN</div><div><b>Alliance pour la<br>Renaissance Nutritionnelle</b><br><small style="color:green">FORMER • ACCOMPAGNER • IMPACTER</small></div></div>
+<div>☰</div>
+</header>
+
 <div class="hero"></div>
-<div class="alert"><p>Ouverture de la session de formation ARN<br>le : 10 Septembre 2026.<br>Rentrée Nutrition 2026 : A venir</p></div>
-<div class="btns">
-<a class="btn o" onclick="goLogin()">CRÉER UN COMPTE ARN Nutrition</a>
-<a class="btn bl" onclick="goLogin()">SE CONNECTER</a>
-<a class="btn gr">📄 Guide d'utilisation</a>
-<a class="btn gr">❓ FAQ</a>
-<a class="btn gn" href="verif/?id=ARN20260005" target="_blank">✅ VÉRIFIER ATTESTATION ARN</a>
-</div>
-<div class="cit">❝ Avec l’ensemble des médecins nutritionnistes, nous poursuivrons les actions pour renforcer la qualité nutritionnelle, l’accompagnement communautaire et l’impact durable en Guinée. ❞<b>Alliance pour la Renaissance Nutritionnelle - Guinée</b></div>
+
+<div class="alert">Ouverture de la session de formation ARN<br>le : 10 Septembre 2026.<br>Rentrée Nutrition 2026 : À venir</div>
+
+<button class="btn btn-outline" onclick="afficher('creation')">CRÉER UN COMPTE ARN</button>
+<button class="btn btn-blue" onclick="afficher('connexion')">SE CONNECTER</button>
+<button class="btn btn-grey">📄 Guide d'utilisation</button>
+<button class="btn btn-grey">❓ FAQ</button>
+<button class="btn btn-green">✅ VÉRIFIER ATTESTATION ARN</button>
+
+<div id="creation" class="form">
+<h3>Créer votre compte ARN</h3>
+<div id="messageCreation" class="msg"></div>
+<input id="matricule" placeholder="Votre Matricule (ex: ARN-2026-0001)">
+<input id="nom" placeholder="Nom complet">
+<input id="email" placeholder="Adresse e-mail">
+<input id="motdepasse" type="password" placeholder="Mot de passe">
+<button class="btn btn-blue" onclick="creerCompte()">Valider et créer mon compte</button>
+<small style="display:block;text-align:center;margin-top:10px">Matricules de test : ARN-2026-0001 à ARN-2026-0005</small>
 </div>
 
-<div id="login">
-<div style="padding:10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee"><div class="logo"><div class="logo-icon">ARN</div><div><b>ARN Guinée</b></div></div><div onclick="goHome()" style="font-size:22px;padding:5px 10px">✕</div></div>
-<div style="margin:30px 16px;border:1.5px solid #0d47a1;padding:20px;border-radius:8px">
-<h3 style="color:#0d47a1;text-align:center;margin-bottom:15px">Connexion ARN</h3>
-<input id="u" placeholder="👤 ID ARN (ex: ARN20260005)" style="width:100%;border:none;border-bottom:1px solid #ccc;padding:12px;margin:8px 0;outline:none">
-<input id="p" type="password" placeholder="🔒 Mot de passe" style="width:100%;border:none;border-bottom:1px solid #ccc;padding:12px;margin:8px 0;outline:none">
-<a style="font-size:11px;color:#0d47a1;text-align:right;display:block;margin:10px 0;text-decoration:none">Mot de passe oublié ?</a>
-<button onclick="goEspace()" style="width:100%;padding:12px;background:#0d47a1;color:#fff;border:none;border-radius:6px;font-weight:700;margin-top:10px">Connexion</button>
-<p style="font-size:10px;color:#888;text-align:center;margin-top:12px">Démo : entrez n'importe quel ID pour tester</p>
-</div>
-</div>
-
-<div id="espace">
-<header><div class="logo"><div class="logo-icon">ARN</div><div><b>ARN</b></div></div><div style="display:flex;gap:10px;align-items:center"><span>👤</span><span onclick="goHome()" style="cursor:pointer">🚪</span></div></header>
-<div class="top"><h2 id="nom">FARA MBINDY KAMANO</h2><p style="font-size:11px;color:#777">kamanogaius58@gmail.com</p><p style="font-size:10px;color:#0d47a1;margin-top:4px">ID: ARN20260005 | Nutritionniste</p></div>
-<div id="list" class="menu">
-<div onclick="showCards()">▶️ Orientation Nutritionnelle</div>
-<div onclick="showCards()">📁 Dossier nutritionniste</div>
-<div onclick="showCards()">⚙️ Cursus Nutritionnel</div>
-<div>💳 Paiement formations ARN</div>
-<div>📄 Documents administratifs</div>
-<div>🎓 Diplômes & Attestations</div>
-<div>🛡️ Assurances</div>
-<div>📚 Guides Nutritionnels</div>
-<div>📝 Relevés bilans nutritionnels</div>
-<div>💼 Insertion Socio-professionnelle</div>
-<div>🎓 Recrutement Formateurs</div>
-<div class="v" onclick="window.open('verif/?id=ARN20260005','_blank')">✅ Vérification Attestation ARN</div>
-</div>
-<div id="cards" class="cards">
-<div class="wel"><span>Bienvenue sur votre espace<br>nutritionniste ARN</span></div>
-<div class="card"><div class="card-t" style="background:#c62828">Orientation Nutritionnelle</div><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600"><div class="card-p">Découvrez votre parcours personnalisé et les conseils nutritionnels adaptés à votre profil.</div></div>
-<div class="card"><div class="card-t" style="background:#689f38">Cursus Nutritionnel</div><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600"><div class="card-p">Suivi de votre formation, modules validés et progression pédagogique.</div></div>
-<div class="card"><div class="card-t" style="background:#ef6c00">Bourse Formation ARN</div><img src="https://images.unsplash.com/photo-1512621776952-a57141f2eefd?w=600"><div class="card-p">Informations sur les aides et bourses disponibles pour votre formation ARN 2026.</div></div>
-<div style="padding:10px"><button onclick="backList()" style="width:100%;padding:10px;border:1px solid #ccc;background:#fff;border-radius:6px">← Retour menu</button></div>
-</div>
+<div id="connexion" class="form">
+<h3>Connexion ARN</h3>
+<div id="messageConnexion" class="msg"></div>
+<input id="matriculeConnexion" placeholder="Votre Matricule">
+<input id="motdepasseConnexion" type="password" placeholder="Mot de passe">
+<button class="btn btn-blue" onclick="seConnecter()">Se connecter</button>
 </div>
 
 <script>
-function goLogin(){document.getElementById('accueil').style.display='none';document.getElementById('login').style.display='flex';}
-function goHome(){document.getElementById('login').style.display='none';document.getElementById('espace').style.display='none';document.getElementById('accueil').style.display='block';document.getElementById('list').style.display='block';document.getElementById('cards').style.display='none';}
-function goEspace(){document.getElementById('login').style.display='none';document.getElementById('espace').style.display='block';}
-function showCards(){document.getElementById('list').style.display='none';document.getElementById('cards').style.display='block';}
-function backList(){document.getElementById('cards').style.display='none';document.getElementById('list').style.display='block';}
+let matriculesValides = ["ARN-2026-0001","ARN-2026-0002","ARN-2026-0003","ARN-2026-0004","ARN-2026-0005"];
+let comptes = JSON.parse(localStorage.getItem('comptesARN') || '[]');
+
+function afficher(type){
+document.getElementById('creation').style.display = type==='creation' ? 'block' : 'none';
+document.getElementById('connexion').style.display = type==='connexion' ? 'block' : 'none';
+}
+
+function afficherMessage(id, texte, succes){
+let e = document.getElementById(id);
+e.style.display='block';
+e.textContent=texte;
+e.className='msg '+(succes?'success':'error');
+}
+
+function creerCompte(){
+let mat = document.getElementById('matricule').value.trim().toUpperCase();
+let nom = document.getElementById('nom').value.trim();
+let email = document.getElementById('email').value.trim();
+let mdp = document.getElementById('motdepasse').value;
+
+if(!matriculesValides.includes(mat)){
+afficherMessage('messageCreation','Ce matricule est invalide ou non autorisé par l administration ARN',false);
+return;
+}
+if(comptes.find(c=>c.matricule===mat)){
+afficherMessage('messageCreation','Ce matricule possède déjà un compte',false);
+return;
+}
+if(!nom || !email || !mdp){
+afficherMessage('messageCreation','Veuillez remplir tous les champs',false);
+return;
+}
+comptes.push({matricule:mat,nom:nom,email:email,password:mdp});
+localStorage.setItem('comptesARN', JSON.stringify(comptes));
+afficherMessage('messageCreation','✅ Compte créé avec succès pour '+mat+' ! Vous pouvez vous connecter maintenant.',true);
+}
+
+function seConnecter(){
+let mat = document.getElementById('matriculeConnexion').value.trim().toUpperCase();
+let mdp = document.getElementById('motdepasseConnexion').value;
+let c = comptes.find(x=>x.matricule===mat && x.password===mdp);
+if(c){
+afficherMessage('messageConnexion','✅ Bienvenue '+c.nom+' ('+c.matricule+') - Connexion réussie !',true);
+}else{
+afficherMessage('messageConnexion','Matricule ou mot de passe incorrect',false);
+}
+}
 </script>
+
 </body>
-</html>
+  </html>
