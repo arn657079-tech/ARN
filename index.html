@@ -1,141 +1,43 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ARN - Alliance Nutritionnelle</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f5f6f8}
-header{display:flex;justify-content:space-between;padding:10px;background:#fff;box-shadow:0 2px 5px #0002;position:sticky;top:0;z-index:10}
-.logo{display:flex;gap:8px;align-items:center}
-.icon{width:48px;height:48px;background:#0d47a1;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
-.hero{height:240px;background:url(https://images.unsplash.com/photo-1559757175-5700dde675bc?w=900) center/cover}
-.alert{margin:-15px 15px 15px;background:#fff;border:2px solid orange;border-radius:12px;padding:12px;text-align:center;color:#b71c1c;font-weight:700;font-style:italic}
-.box{margin:15px;display:flex;flex-direction:column;gap:9px;max-width:420px;margin:0 auto}
-.btn{padding:12px;border-radius:8px;font-weight:700;text-align:center;border:2px solid;text-decoration:none;display:block;cursor:pointer}
-.blue{background:#0d47a1;color:#fff;border-color:#0d47a1}
-.out{background:#fff;color:#0d47a1;border-color:#0d47a1}
-.green{background:#2e7d32;color:#fff;border-color:#2e7d32}
-.gray{background:#fff;color:#666;border-color:#aaa}
-.modal{display:none;position:fixed;inset:0;background:#fff;z-index:999;overflow:auto}
-.form{margin:20px 15px;border:1.5px solid #0d47a1;padding:20px;border-radius:8px}
-.inp{width:100%;padding:12px;border:none;border-bottom:1px solid #ccc;margin:8px 0;outline:none}
-.err{color:#c62828;font-size:12px;margin:5px 0;display:none}
-.ok{color:#2e7d32;font-size:12px;margin:5px 0;display:none}
-#espace{display:none;min-height:100vh;background:#f2f3f5}
-.top{background:#fff;padding:14px;text-align:center}
-.menu{background:#fff}
-.menu div{padding:15px;border-bottom:1px solid #eee}
-</style>
-</head>
-<body>
-<div id="accueil">
-<header><div class="logo"><div class="icon">ARN</div><div><b style="color:#0d47a1;font-size:11px">Alliance pour la<br>Renaissance Nutritionnelle</b><br><small style="color:#2e7d32;font-size:8px">FORMER • ACCOMPAGNER • IMPACTER</small></div></div><div>☰</div></header>
-<div class="hero"></div>
-<div class="alert">Ouverture session formation ARN le : 10 Sept 2026.<br>Rentrée Nutrition 2026 : A venir</div>
-<div class="box" style="padding-bottom:20px">
-<a class="btn out" onclick="openReg()">CRÉER UN COMPTE ARN Nutrition</a>
-<a class="btn blue" onclick="openLogin()">SE CONNECTER</a>
-<a class="btn gray">📄 Guide d'utilisation</a>
-<a class="btn gray">❓ FAQ</a>
-<a class="btn green" href="verif/?id=ARN20260005" target="_blank">✅ VÉRIFIER ATTESTATION</a>
-</div>
-</div>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARN</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#f5f6f8}header{background:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #0d4aa5;position:sticky;top:0;z-index:100}.logo{display:flex;gap:10px;align-items:center;cursor:pointer}.logo-icon{width:48px;height:48px;background:#0d4aa5;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}.hero{height:190px;background:linear-gradient(rgba(13,74,165,.75),rgba(13,74,165,.75)),url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800') center/cover;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}.alert{border:2px solid #f59e0b;border-radius:12px;padding:12px;margin:15px;text-align:center;color:#b91c1c;font-weight:bold;background:#fffef2}.btn{display:block;width:90%;margin:10px auto;padding:13px;border-radius:10px;font-weight:bold;text-align:center;cursor:pointer}.btn-outline{border:2px solid #0d4aa5;color:#0d4aa5;background:#fff}.btn-blue{background:#0d4aa5;color:#fff;border:none}.btn-grey{background:#f3f3f3;border:1px solid #ccc;color:#333}.btn-green{background:#16a34a;color:#fff;border:none}.card{width:92%;margin:15px auto;background:#fff;padding:18px;border-radius:14px;box-shadow:0 4px 15px rgba(0,0,0,.08);display:none}.card h3{color:#0d4aa5;margin-bottom:10px;text-align:center}.card input,.card select,.card textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:8px}.msg{padding:10px;border-radius:8px;margin:10px 0;text-align:center;display:none;font-weight:bold}.success{background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}.profile-header{background:linear-gradient(135deg,#0d4aa5,#1e6de0);color:#fff;padding:20px;border-radius:14px;text-align:center}.avatar{width:80px;height:80px;background:#fff;color:#0d4aa5;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:bold}.info-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eee;font-size:14px}.info-line b{color:#0d4aa5}
+.menu{position:absolute;top:60px;right:10px;background:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.2);display:none;min-width:180px;z-index:200}.menu div{padding:12px 15px;border-bottom:1px solid #eee;cursor:pointer}.menu div:hover{background:#f0f6ff}
+</style></head><body>
+<header>
+<div class="logo" onclick="goAccueil()"><div class="logo-icon">ARN</div><div><b>Alliance pour la<br>Renaissance Nutritionnelle</b><br><small style="color:green">FORMER • ACCOMPAGNER • IMPACTER</small></div></div>
+<div onclick="toggleMenu()" style="font-size:24px;cursor:pointer;padding:5px 10px">☰</div>
+<div id="menuBox" class="menu"><div onclick="goAccueil()">🏠 Accueil</div><div onclick="afficher('creation');toggleMenu()">➕ Créer compte</div><div onclick="afficher('connexion');toggleMenu()">🔑 Se connecter</div><div onclick="afficher('admin');toggleMenu()">⚙️ ADMIN - Gérer matricules</div></div>
+</header>
+<div class="hero"><div><h2>Bienvenue à l'ARN</h2><p>Plateforme officielle des apprenants</p></div></div>
+<div class="alert">Ouverture session ARN : 10 Septembre 2026<br>10.000.000 places - Matricules avec 3 tirets acceptés</div>
 
-<!-- INSCRIPTION AVEC MATRICULE -->
-<div id="reg" class="modal">
-<header><div class="logo"><div class="icon">ARN</div><b>ARN</b></div><div onclick="closeAll()" style="font-size:24px;padding:5px 10px">✕</div></header>
-<div class="form">
-<h3 style="color:#0d47a1;text-align:center">Créer son compte ARN</h3>
-<p style="font-size:11px;color:#666;text-align:center;margin:10px 0">Entrez le matricule fourni par l'administration</p>
-<input id="r_mat" class="inp" placeholder="🔢 Matricule ARN (ex: ARN20260005)">
-<input id="r_nom" class="inp" placeholder="👤 Nom complet">
-<input id="r_mail" class="inp" placeholder="📧 Email">
-<input id="r_pass" type="password" class="inp" placeholder="🔒 Créer un mot de passe">
-<input id="r_pass2" type="password" class="inp" placeholder="🔒 Confirmer mot de passe">
-<p id="r_err" class="err"></p>
-<p id="r_ok" class="ok"></p>
-<button onclick="creerCompte()" style="width:100%;padding:12px;background:#0d47a1;color:#fff;border:none;border-radius:6px;font-weight:700;margin-top:10px">Créer mon compte</button>
-<p style="text-align:center;margin-top:12px;font-size:12px">Déjà un compte ? <span onclick="openLogin()" style="color:#0d47a1;font-weight:700;cursor:pointer">Se connecter</span></p>
-</div>
-</div>
+<div id="accueil"><button class="btn btn-outline" onclick="afficher('creation')">CRÉER UN COMPTE ARN</button><button class="btn btn-blue" onclick="afficher('connexion')">SE CONNECTER</button><button class="btn btn-grey">📄 Guide</button><button class="btn btn-green">✅ VÉRIFIER ATTESTATION</button></div>
 
-<!-- CONNEXION -->
-<div id="login" class="modal">
-<header><div class="logo"><div class="icon">ARN</div><b>ARN</b></div><div onclick="closeAll()" style="font-size:24px;padding:5px 10px">✕</div></header>
-<div class="form">
-<h3 style="color:#0d47a1;text-align:center">Connexion ARN</h3>
-<input id="l_mat" class="inp" placeholder="🔢 Matricule ARN">
-<input id="l_pass" type="password" class="inp" placeholder="🔒 Mot de passe">
-<p id="l_err" class="err"></p>
-<button onclick="seConnecter()" style="width:100%;padding:12px;background:#0d47a1;color:#fff;border:none;border-radius:6px;font-weight:700;margin-top:10px">Connexion</button>
-<p style="text-align:center;margin-top:12px;font-size:12px">Pas de compte ? <span onclick="openReg()" style="color:#0d47a1;font-weight:700;cursor:pointer">Créer avec matricule</span></p>
-</div>
-</div>
+<div id="creation" class="card"><h3>Créer votre compte ARN</h3><div id="msgCrea" class="msg"></div>
+<input id="matricule" placeholder="ARN-2026-PRES-0001 (3 tirets OK)">
+<input id="nom" placeholder="Nom"><input id="prenom" placeholder="Prénom"><input id="naissance" type="date"><select id="sexe"><option value="">Sexe</option><option>Masculin</option><option>Féminin</option></select><input id="email" placeholder="Email"><input id="tel" placeholder="Téléphone"><select id="filiere"><option value="">Filière</option><option>Nutrition Communautaire</option><option>Diététique</option><option>Sécurité Alimentaire</option></select><input id="centre" placeholder="Centre / Ville"><input id="mdp" type="password" placeholder="Mot de passe"><button class="btn btn-blue" onclick="creerCompte()">Valider et créer</button></div>
 
-<!-- ESPACE ETUDIANT -->
-<div id="espace">
-<header><div class="logo"><div class="icon">ARN</div><b id="e_mat">ARN</b></div><div onclick="logout()" style="cursor:pointer">🚪</div></header>
-<div class="top"><h2 id="e_nom" style="color:#ef6c00">NOM</h2><p id="e_mail" style="font-size:11px;color:#777"></p><p id="e_id" style="font-size:10px;color:#0d47a1"></p></div>
-<div class="menu">
-<div>▶️ Orientation Nutritionnelle</div>
-<div>📁 Dossier nutritionniste</div>
-<div>⚙️ Cursus Nutritionnel</div>
-<div>💳 Paiement formations ARN</div>
-<div>🎓 Diplômes & Attestations</div>
-<div style="background:#e8f5e9;color:#2e7d32;font-weight:700" onclick="window.open('verif/?id='+localStorage.getItem('arn_current'),' _blank')">✅ Vérification Attestation ARN</div>
-</div>
-</div>
+<div id="connexion" class="card"><h3>Connexion ARN</h3><div id="msgConn" class="msg"></div><input id="matConn" placeholder="ARN-2026-PRES-0001"><input id="mdpConn" type="password" placeholder="Mot de passe"><button class="btn btn-blue" onclick="seConnecter()">Se connecter</button><br><button class="btn btn-grey" onclick="goAccueil()">← Retour Accueil</button></div>
+
+<div id="profil" class="card"><div class="profile-header"><div class="avatar" id="avatarLettre">A</div><h2 id="pNomComplet"></h2><p id="pMatricule"></p></div><div style="margin-top:10px"><div class="info-line"><span>Matricule ARN</span><b id="pMat"></b></div><div class="info-line"><span>Nom & Prénom</span><b id="pNomPre"></b></div><div class="info-line"><span>Filière</span><b id="pFiliere"></b></div><div class="info-line"><span>Centre</span><b id="pCentre"></b></div><div class="info-line"><span>Email</span><b id="pEmail"></b></div></div><button class="btn btn-grey" onclick="deconnecter()">Se déconnecter</button><button class="btn btn-blue" onclick="goAccueil()">🏠 Accueil</button></div>
+
+<div id="admin" class="card"><h3>ADMIN ARN - Tes matricules</h3><div id="msgAdmin" class="msg"></div><textarea id="listeMat" rows="7" placeholder="Colle tes matricules ici&#10;ARN-2026-0001&#10;ARN-2026-PRES-0001&#10;ARN-2026-PRES-0002"></textarea><button class="btn btn-blue" onclick="sauverListe()">💾 Sauver la liste</button><p>Mode: <b id="modeActuel"></b> | Total: <b id="totalMat">0</b></p><div id="listeAffichee" style="max-height:150px;overflow:auto;background:#f9f9f9;padding:8px;border-radius:8px;font-size:12px"></div><button class="btn btn-grey" onclick="goAccueil()">🏠 Retour Accueil</button></div>
 
 <script>
-// BASE MATRICULES AUTORISÉS (par admin)
-if(!localStorage.getItem('arn_matricules')){
-  localStorage.setItem('arn_matricules', JSON.stringify(["ARN20260005","ARN20260006","ARN20260007","ARN20260008","ARN20260009","ARN20260010"]));
-}
-function getMatricules(){return JSON.parse(localStorage.getItem('arn_matricules')||"[]")}
-function getUsers(){return JSON.parse(localStorage.getItem('arn_users')||"[]")}
-function saveUsers(u){localStorage.setItem('arn_users', JSON.stringify(u))}
-
-function openReg(){document.getElementById('accueil').style.display='none';document.getElementById('reg').style.display='block';document.getElementById('login').style.display='none';}
-function openLogin(){document.getElementById('accueil').style.display='none';document.getElementById('login').style.display='block';document.getElementById('reg').style.display='none';}
-function closeAll(){document.getElementById('reg').style.display='none';document.getElementById('login').style.display='none';document.getElementById('accueil').style.display='block';}
-
-function creerCompte(){
-  let m=document.getElementById('r_mat').value.trim().toUpperCase();
-  let n=document.getElementById('r_nom').value.trim();
-  let e=document.getElementById('r_mail').value.trim();
-  let p=document.getElementById('r_pass').value;
-  let p2=document.getElementById('r_pass2').value;
-  let err=document.getElementById('r_err'); let ok=document.getElementById('r_ok');
-  err.style.display='none'; ok.style.display='none';
-  
-  if(!m||!n||!e||!p){err.textContent="Remplis tous les champs"; err.style.display='block'; return;}
-  if(!getMatricules().includes(m)){err.textContent="Matricule invalide. Contacte l'administration ARN."; err.style.display='block'; return;}
-  if(getUsers().find(u=>u.mat===m)){err.textContent="Ce matricule a déjà un compte."; err.style.display='block'; return;}
-  if(p!==p2){err.textContent="Les mots de passe ne correspondent pas"; err.style.display='block'; return;}
-  if(p.length<4){err.textContent="Mot de passe trop court (4 min)"; err.style.display='block'; return;}
-
-  let users=getUsers(); users.push({mat:m,nom:n,mail:e,pass:p}); saveUsers(users);
-  ok.textContent="Compte créé ! Tu peux te connecter maintenant."; ok.style.display='block';
-  setTimeout(openLogin,1500);
-}
-
-function seConnecter(){
-  let m=document.getElementById('l_mat').value.trim().toUpperCase();
-  let p=document.getElementById('l_pass').value;
-  let err=document.getElementById('l_err'); err.style.display='none';
-  let u=getUsers().find(x=>x.mat===m && x.pass===p);
-  if(!u){err.textContent="Matricule ou mot de passe incorrect"; err.style.display='block'; return;}
-  localStorage.setItem('arn_current', m);
-  document.getElementById('e_nom').textContent=u.nom;
-  document.getElementById('e_mail').textContent=u.mail;
-  document.getElementById('e_id').textContent="ID: "+u.mat;
-  document.getElementById('e_mat').textContent=u.mat;
-  document.getElementById('login').style.display='none';
-  document.getElementById('espace').style.display='block';
-}
-
-function logout(){localStorage.removeItem('arn_current'); document.getElementById('espace').style.display='none'; document.getElementById('accueil').style.display='block';}
-</script>
-</body>
-</html>
+let comptes=JSON.parse(localStorage.getItem('comptesARN_V2')||'[]');let listeAutorisee=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');
+function toggleMenu(){let m=document.getElementById('menuBox');m.style.display=m.style.display==='block'?'none':'block';}
+function goAccueil(){document.getElementById('menuBox').style.display='none';['creation','connexion','profil','admin'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('accueil').style.display='block';document.getElementById('accueil').style.display='block';}
+function afficher(id){document.getElementById('menuBox').style.display='none';document.getElementById('accueil').style.display='none';['creation','connexion','profil','admin'].forEach(k=>{let e=document.getElementById(k);if(e)e.style.display='none'});let c=document.getElementById(id);if(c)c.style.display='block';if(id==='admin')refreshAdmin();}
+function msg(id,txt,ok){let e=document.getElementById(id);e.style.display='block';e.textContent=txt;e.className='msg '+(ok?'success':'error');}
+function normaliserMat(mat){return mat.trim().toUpperCase().replace(/\s+/g,'-').replace(/--+/g,'-');}
+function estFormatValide(mat){return /^ARN-\d{4}(-[A-Z]+)*-\d{1,8}$/.test(mat);}
+function estMatriculeAutorise(mat){mat=normaliserMat(mat);if(!estFormatValide(mat))return{ok:false,raison:'Format invalide. Exemple OK: ARN-2026-0001 ou ARN-2026-PRES-0001 (3 tirets OK)'};if(listeAutorisee.length===0)return{ok:true};if(listeAutorisee.includes(mat))return{ok:true};return{ok:false,raison:'Matricule non autorisé par admin'};}
+function creerCompte(){let mat=normaliserMat(document.getElementById('matricule').value);let check=estMatriculeAutorise(mat);if(!check.ok){msg('msgCrea',check.raison,false);return;}if(comptes.find(c=>c.matricule===mat)){msg('msgCrea','Déjà un compte',false);return;}let nom=document.getElementById('nom').value.trim(),prenom=document.getElementById('prenom').value.trim(),naiss=document.getElementById('naissance').value,sexe=document.getElementById('sexe').value,email=document.getElementById('email').value.trim(),tel=document.getElementById('tel').value.trim(),filiere=document.getElementById('filiere').value,centre=document.getElementById('centre').value.trim(),mdp=document.getElementById('mdp').value;if(!nom||!prenom||!email||!mdp){msg('msgCrea','Remplis Nom, Prénom, Email, MDP',false);return;}let nouveau={matricule:mat,nom,prenom,naissance:naiss,sexe,email,tel,filiere,centre,password:mdp};comptes.push(nouveau);localStorage.setItem('comptesARN_V2',JSON.stringify(comptes));msg('msgCrea','✅ Compte créé '+mat,true);}
+function seConnecter(){let mat=normaliserMat(document.getElementById('matConn').value);let mdp=document.getElementById('mdpConn').value;let c=comptes.find(x=>x.matricule===mat&&x.password===mdp);if(!c){msg('msgConn','Matricule ou MDP incorrect',false);return;}localStorage.setItem('sessionARN',JSON.stringify(c));afficherProfil(c);}
+function afficherProfil(c){afficher('profil');document.getElementById('avatarLettre').textContent=(c.prenom||c.nom||'A')[0].toUpperCase();document.getElementById('pNomComplet').textContent=c.prenom+' '+c.nom;document.getElementById('pMatricule').textContent=c.matricule;document.getElementById('pMat').textContent=c.matricule;document.getElementById('pNomPre').textContent=c.nom+' '+c.prenom;document.getElementById('pFiliere').textContent=c.filiere||'-';document.getElementById('pCentre').textContent=c.centre||'-';document.getElementById('pEmail').textContent=c.email;}
+function deconnecter(){localStorage.removeItem('sessionARN');goAccueil();location.reload();}
+function sauverListe(){let txt=document.getElementById('listeMat').value;let lignes=txt.split('\n').map(l=>normaliserMat(l)).filter(l=>l&&estFormatValide(l));listeAutorisee=[...new Set(lignes)];localStorage.setItem('listeMatriculesARN',JSON.stringify(listeAutorisee));msg('msgAdmin','✅ '+listeAutorisee.length+' matricules sauvés',true);refreshAdmin();}
+function refreshAdmin(){document.getElementById('totalMat').textContent=listeAutorisee.length;document.getElementById('modeActuel').textContent=listeAutorisee.length===0?'LIBRE (ARN-... accepté)':'RESTREINT (ta liste)';document.getElementById('listeAffichee').innerHTML=listeAutorisee.length?listeAutorisee.slice(0,200).join('<br>'):'Aucune liste - tous formats ARN acceptés';}
+let session=localStorage.getItem('sessionARN');if(session){try{afficherProfil(JSON.parse(session));}catch(e){}}
+document.getElementById('accueil').style.display='block';refreshAdmin();
+</script></body></html>
