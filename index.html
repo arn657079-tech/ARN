@@ -1,105 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ARN</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f1f5f9}
-header{background:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px #ccc}
-.logo{background:#1e3a8a;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
-.card{width:96%;max-width:700px;margin:14px auto;background:#fff;padding:18px;border-radius:14px}
-.btn{width:100%;padding:13px;border:none;border-radius:10px;font-weight:bold;margin-top:10px}
-.btn-bleu{background:#1e40af;color:#fff}.btn-vert{background:#16a34a;color:#fff}.btn-gris{background:#e5e7eb}
-input{width:100%;padding:11px;margin:6px 0;border:1px solid #cbd5e1;border-radius:8px}
-.top-qr{display:flex;gap:16px;align-items:center;justify-content:space-between;border:2px solid #1e3a8a;border-radius:12px;padding:14px;background:#f8fafc}
-.qr-box img{width:130px;height:130px;border-radius:10px}
-.photo-rond{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #1e3a8a}
-</style>
-</head>
-<body>
-<header><div style="display:flex;gap:10px;align-items:center"><div class="logo">ARN</div><b>Alliance Renaissance Nutritionnelle</b></div><div>☰</div></header>
-
-<div id="accueil" class="card" style="text-align:center">
-<h3 style="background:linear-gradient(135deg,#1e3a8a,#16a34a);color:#fff;padding:18px;border-radius:10px">ARN là où commence la vie nous agissons</h3>
-<button class="btn btn-vert" onclick="showPage('creation')">Verifier matricule</button>
-<button class="btn btn-bleu" onclick="showPage('creation')">Creer mon compte</button>
-<button class="btn btn-bleu" style="background:#0f172a" onclick="showPage('connexion')">Se connecter</button>
-<button class="btn btn-gris" onclick="showPage('secretaireLogin')">Secretaire</button>
-</div>
-
-<div id="creation" class="card" style="display:none"><h3>Creer un compte</h3><input id="cMat" placeholder="ARN 2026 PRS 0001"><input id="cPass" type="password" placeholder="Mot de passe"><button class="btn btn-vert" onclick="creerCompte()">Creer</button><button class="btn btn-gris" onclick="showPage('accueil')">Retour</button></div>
-<div id="connexion" class="card" style="display:none"><h3>Connexion</h3><input id="lMat" placeholder="Matricule"><input id="lPass" type="password" placeholder="Mot de passe"><button class="btn btn-bleu" onclick="login()">Entrer</button><button class="btn btn-gris" onclick="showPage('accueil')">Retour</button></div>
-<div id="secretaireLogin" class="card" style="display:none"><h3>Secretaire - ARN2026</h3><input id="sPass" type="password"><button class="btn btn-bleu" onclick="loginSec()">Entrer</button><button class="btn btn-gris" onclick="showPage('accueil')">Retour</button></div>
-
-<div id="admin" class="card" style="display:none">
-<h3>Gestion Secretaire</h3>
-<div style="display:flex;gap:6px"><input id="addMat" placeholder="ARN 2026 PRS 0001"><button onclick="ajouter()" style="width:90px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:bold">Ajouter</button></div>
-<input id="search" placeholder="Rechercher..." oninput="render()" style="margin-top:10px;border:2px solid #1e40af">
-<div id="liste"></div>
-<div id="detail" style="display:none;margin-top:16px;border:2px solid #1e40af;border-radius:14px;padding:14px">
-<h3 id="dMat" style="color:#1e3a8a"></h3>
-<div class="top-qr"><img id="dPhoto" class="photo-rond" style="display:none"><div id="dQR" class="qr-box"></div></div>
-<div id="dInfos" style="margin-top:12px"></div>
-<button class="btn btn-gris" onclick="document.getElementById('detail').style.display='none'">Fermer</button>
-</div>
-</div>
-
-<div id="fiche" class="card" style="display:none">
-<h3>Fiche: <span id="fMat"></span></h3>
-<input type="file" accept="image/*" onchange="savePhoto(this)">
-<img id="fPhoto" class="photo-rond" style="display:none;margin-top:10px">
-<input id="f_nom" placeholder="Nom complet">
-<input id="f_fonc" placeholder="Fonction">
-<input id="f_aff" placeholder="Affectation">
-<canvas id="sig" width="500" height="180" style="border:2px dashed #1e40af;border-radius:8px;width:100%;margin-top:10px"></canvas>
-<div style="display:flex;gap:8px;margin-top:8px">
-<button class="btn btn-gris" style="width:auto" onclick="clearSig()">Effacer</button>
-<button class="btn btn-bleu" style="width:auto" onclick="saveSig()">Valider</button>
-</div>
-<img id="fSig" style="display:none;width:100%;margin-top:8px;border:1px solid #ccc">
-<button class="btn btn-vert" onclick="saveFiche()">Enregistrer</button>
-<button class="btn btn-gris" onclick="showPage('accueil')">Deconnexion</button>
-</div>
-
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARN</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#f1f5f9}header{background:#fff;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:100}.logo{background:#1e3a8a;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}.menu-icon{font-size:28px;cursor:pointer}.menu{position:absolute;top:68px;right:10px;background:#fff;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.2);display:none;min-width:240px;z-index:200}.menu div{padding:14px;border-bottom:1px solid #eee;cursor:pointer}.card{width:96%;max-width:680px;margin:12px auto;background:#fff;padding:16px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)}.btn{width:100%;padding:13px;border:none;border-radius:8px;font-weight:bold;margin-top:8px;cursor:pointer}.btn-bleu{background:#1e40af;color:#fff}.btn-vert{background:#16a34a;color:#fff}.btn-gris{background:#e5e7eb;color:#333}input,select{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:8px}label{font-size:13px;font-weight:bold;color:#334155;margin-top:10px;display:block}.req{color:#dc2626}.niveau{border:1px solid #e2e8f0;border-left:4px solid #1e40af;padding:12px;border-radius:10px;margin-top:14px;background:#f8fafc}.photo-preview{width:90px;height:90px;border-radius:50%;object-fit:cover;border:2px solid #1e40af;background:#e2e8f0}.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:bold}.actif{background:#dcfce7;color:#166534}.attente{background:#fef9c3;color:#854d0e}</style></head><body>
+<header><div style="display:flex;gap:10px;align-items:center"><div class="logo">ARN</div><div><b>Alliance pour la Renaissance Nutritionnelle</b><br><small style="color:#16a34a">FORMER - ACCOMPAGNER - IMPACTER</small></div></div><div class="menu-icon" onclick="toggleMenu()">☰</div><div id="menuBox" class="menu"><div onclick="show('accueil')">🏠 Accueil</div><div onclick="show('creation')">➕ Créer compte (Personnel)</div><div onclick="show('connexion')">🔑 Se connecter</div><div onclick="show('adminLogin')">⚙️ ADMIN</div><div id="menuPerso" style="display:none" onclick="show('fiche')">📋 Ma Fiche</div><div id="menuLogout" style="display:none;color:#dc2626" onclick="logout()">🚪 Déconnexion</div></div></header>
+<div id="accueil" class="card" style="text-align:center"><div style="background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:12px;color:#b91c1c;font-weight:bold">Session ARN : 10 Septembre 2026 - Format accepté : ARN-2026-PRES-0001</div><button class="btn btn-bleu" onclick="show('creation')">CRÉER MON COMPTE AVEC MON MATRICULE</button><button class="btn btn-bleu" onclick="show('connexion')">SE CONNECTER</button></div>
+<div id="creation" class="card" style="display:none"><h3>Création - Personnel</h3><label>Matricule reçu <span class="req">*</span></label><input id="cMat" placeholder="ARN-2026-PRES-0001"><label>Mot de passe temporaire <span class="req">*</span></label><input id="cMdpTemp" type="password" placeholder="ARN2026"><button class="btn btn-bleu" onclick="creerCompte()">Vérifier mon matricule</button><button class="btn btn-gris" onclick="show('accueil')">Retour</button></div>
+<div id="connexion" class="card" style="display:none"><h3>Connexion</h3><input id="lMat" placeholder="Matricule"><input id="lMdp" type="password" placeholder="Mot de passe"><button class="btn btn-bleu" onclick="login()">Se connecter</button><button class="btn btn-gris" onclick="show('accueil')">Retour</button></div>
+<div id="adminLogin" class="card" style="display:none"><h3>ADMIN</h3><input id="adminMdp" type="password" placeholder="Mot de passe ADMIN"><button class="btn btn-bleu" onclick="adminLogin()">Entrer</button></div>
+<div id="admin" class="card" style="display:none"><h2 style="text-align:center;color:#1e40af">ADMIN - Génère matricules</h2><div style="background:#eff6ff;padding:12px;border-radius:10px;border:1px solid #93c5fd;margin-top:10px"><b>ADM génère un matricule :</b><div style="display:flex;gap:6px;margin-top:6px"><input id="addOneMat" placeholder="ARN-2026-PRES-0001" style="margin:0"><button onclick="ajouterUn()" style="width:110px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-weight:bold">➕ Générer</button></div></div><input id="searchAdmin" placeholder="🔍 Rechercher..." oninput="renderAdmin()" style="margin-top:10px"><div id="adminListe" style="max-height:700px;overflow:auto;margin-top:10px"></div><div id="adminDetail" style="display:none;background:#fff;border:2px solid #1e40af;border-radius:12px;padding:14px;margin-top:14px"><h3 id="dMat"></h3><div id="dContent"></div><button class="btn btn-gris" onclick="document.getElementById('adminDetail').style.display='none'">Fermer</button></div></div>
+<div id="fiche" class="card" style="display:none"><h2>Ma Fiche (Tout obligatoire <span class="req">*</span>) - <span id="fMatricule"></span></h2>
+<div class="niveau"><h4>NIVEAU 1 : SÉCURITÉ</h4><label>Photo profil *</label><input type="file" accept="image/*" onchange="savePhoto(this,'photoProfil')"><img id="prev_profil" class="photo-preview" style="display:none"><label>N° Pièce *</label><input id="f_pieceNum"><label>Photo recto *</label><input type="file" accept="image/*" onchange="savePhoto(this,'pieceRecto')"><label>Photo verso *</label><input type="file" accept="image/*" onchange="savePhoto(this,'pieceVerso')"><label>Nouveau mot de passe *</label><input id="f_newMdp" type="password"></div>
+<div class="niveau"><h4>NIVEAU 2 : PERSONNEL</h4><label>Prénom et Nom *</label><input id="f_nom"><label>Sexe *</label><select id="f_sexe"><option value="">Choisir</option><option>Masculin</option><option>Féminin</option></select><label>Date naissance *</label><input id="f_dob" type="date"><label>Lieu naissance *</label><input id="f_lieu"><label>Nationalité *</label><input id="f_nat" value="Guinéenne"><label>Groupe sanguin *</label><select id="f_gs"><option value="">Choisir</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+<div class="niveau"><h4>NIVEAU 3 : FILIATION</h4><label>Père *</label><input id="f_pere"><label>Mère *</label><input id="f_mere"><label>Situation *</label><select id="f_sit"><option>Célibataire</option><option>Marié(e)</option><option>Divorcé(e)</option><option>Veuf(ve)</option></select><label>Conjoint + enfants</label><input id="f_conj"><label>Urgence Nom+Contact *</label><input id="f_urg"></div>
+<div class="niveau"><h4>NIVEAU 4 : ARN</h4><label>Série *</label><input id="f_serie"><label>Fonction *</label><input id="f_fonc"><label>Profession *</label><input id="f_prof"><label>Grade *</label><input id="f_grade"><label>Date engagement *</label><input id="f_eng" type="date"><label>Affectation *</label><input id="f_aff"><label>Chef hiérarchique *</label><input id="f_chef"></div>
+<div class="niveau"><h4>NIVEAU 5 : CONTACT</h4><label>Adresse *</label><input id="f_adr"><label>Email *</label><input id="f_email"><label>Contact 1 *</label><input id="f_c1"><label>Contact 2 WhatsApp *</label><input id="f_c2"><label>Signature *</label><input id="f_sig"></div>
+<button class="btn btn-vert" onclick="sauverFiche()">💾 Sauver MA FICHE COMPLÈTE</button></div>
 <script>
-var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');
-var users=JSON.parse(localStorage.getItem('arn_users')||'{}');
-if(liste.length==0){liste=[];for(var i=1;i<=1000;i++){var p=('000'+i);liste.push('ARN 2026 '+p.slice(-4));}liste.push('ARN 2026 PRS 0001');}
-var current=null;
-function showPage(id){var pages=['accueil','creation','connexion','secretaireLogin','admin','fiche'];for(var i=0;i<pages.length;i++){var el=document.getElementById(pages[i]);if(el)el.style.display='none';}document.getElementById(id).style.display='block';}
-function norm(s){return s.trim().toUpperCase().replace(/\s+/g,' ');}
-function valide(s){return /^ARN \d{4}( [A-Z]+)* \d{1,8}$/.test(s);}
-function saveLS(){localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));localStorage.setItem('arn_users',JSON.stringify(users));}
-function creerCompte(){var m=norm(document.getElementById('cMat').value);var p=document.getElementById('cPass').value;if(!valide(m)||liste.indexOf(m)===-1){alert('Matricule invalide');return;}if(p.length<4){alert('Mot de passe court');return;}if(!users[m])users[m]={};users[m].matricule=m;users[m].password=p;saveLS();current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
-function login(){var m=norm(document.getElementById('lMat').value);var p=document.getElementById('lPass').value;if(!users[m]||users[m].password!==p){alert('Erreur');return;}current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
-function loginSec(){if(document.getElementById('sPass').value==='ARN2026'){showPage('admin');render();}else alert('Mot de passe incorrect');}
-function ajouter(){var m=norm(document.getElementById('addMat').value);if(!valide(m)){alert('Format invalide');return;}if(liste.indexOf(m)===-1){liste.push(m);liste.sort();saveLS();}document.getElementById('search').value=m;render();}
-function render(){var f=document.getElementById('search').value.toUpperCase();var aff=[];if(f){for(var i=0;i<liste.length;i++){if(liste[i].indexOf(f)!==-1)aff.push(liste[i]);}}else{aff=liste.slice().reverse().slice(0,100);}var h='<small>'+liste.length+' matricules</small>';for(var i=0;i<aff.length;i++){var mm=aff[i];var u=users[mm]||{};var nm=u.nom?u.nom:'<span style=color:#94a3b8>vide</span>';h=h+'<div style="border:1px solid #ddd;padding:8px;margin-top:6px;border-radius:8px;display:flex;justify-content:space-between"><div><b>'+mm+'</b><br>'+nm+'</div><button onclick="voirDetail(\''+mm+'\')" style="background:#1e40af;color:#fff;border:none;padding:6px 12px;border-radius:6px">Voir</button></div>';}document.getElementById('liste').innerHTML=h;}
-function voirDetail(m){
-var u=users[m]||{};
-document.getElementById('detail').style.display='block';
-document.getElementById('dMat').textContent=m;
-var ph=document.getElementById('dPhoto');
-if(u.photoProfil){ph.src=u.photoProfil;ph.style.display='block';}else{ph.style.display='none';}
-var html='';
-if(u.nom){html=html+'<div><b>Nom:</b> '+u.nom+'</div>';}
-if(u.fonc){html=html+'<div><b>Fonction:</b> '+u.fonc+'</div>';}
-if(u.aff){html=html+'<div><b>Affectation:</b> '+u.aff+'</div>';}
-if(u.signature){html=html+'<div style="margin-top:10px"><b>Signature:</b><br><img src="'+u.signature+'" style="width:100%;border:1px solid #000;border-radius:8px"></div>';}
-if(html==''){html='<i style="color:#999">Fiche vide</i>';}
-document.getElementById('dInfos').innerHTML=html;
-var nomAff=u.nom?u.nom:m;
-var lien='https://arn657079-tech.github.io/ARN/?verif='+encodeURIComponent(m);
-var contenu=nomAff+'\n'+lien;
-document.getElementById('dQR').innerHTML='<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(contenu)+'">';
-}
-function savePhoto(input){var f=input.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){if(!users[current])users[current]={};users[current].photoProfil=e.target.result;saveLS();var img=document.getElementById('fPhoto');img.src=e.target.result;img.style.display='block';};r.readAsDataURL(f);}
-function saveFiche(){if(!users[current])users[current]={};users[current].nom=document.getElementById('f_nom').value;users[current].fonc=document.getElementById('f_fonc').value;users[current].aff=document.getElementById('f_aff').value;saveLS();alert('Enregistre');}
-function clearSig(){document.getElementById('sig').getContext('2d').clearRect(0,0,500,180);}
-function saveSig(){var c=document.getElementById('sig');var data=c.toDataURL();if(data.length<1000){alert('Dessine');return;}if(!users[current])users[current]={};users[current].signature=data;saveLS();document.getElementById('fSig').src=data;document.getElementById('fSig').style.display='block';}
-(function(){var c=document.getElementById('sig');if(!c)return;var ctx=c.getContext('2d');var drawing=false;function pos(e){var rect=c.getBoundingClientRect();var t=e.touches?e.touches[0]:e;return {x:(t.clientX-rect.left)*(c.width/rect.width),y:(t.clientY-rect.top)*(c.height/rect.height)};}c.addEventListener('mousedown',function(e){drawing=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('mousemove',function(e){if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('mouseup',function(){drawing=false;});c.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
+var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');if(!liste.length){liste=[];for(let i=1;i<=1000;i++)liste.push('ARN-2026-'+String(i).padStart(4,'0'));localStorage.setItem('listeMatriculesARN',JSON.stringify(liste))}var users=JSON.parse(localStorage.getItem('arn_users')||'{}');var current=null;
+function toggleMenu(){var m=document.getElementById('menuBox');m.style.display=m.style.display==='block'?'none':'block'}function show(id){['accueil','creation','connexion','adminLogin','admin','fiche'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display='block';document.getElementById('menuBox').style.display='none'}
+function norm(m){return m.trim().toUpperCase().replace(/\s+/g,'-').replace(/--+/g,'-')}function valide(m){return /^ARN-\d{4}(-[A-Z]+)*-\d{1,8}$/.test(m)}function saveLS(){localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));localStorage.setItem('arn_users',JSON.stringify(users))}
+function creerCompte(){let mat=norm(document.getElementById('cMat').value);let tmp=document.getElementById('cMdpTemp').value;if(!valide(mat)){alert('Matricule invalide');return}if(!liste.includes(mat)){alert('Matricule non généré par ADM');return}if(tmp!=='ARN2026'){alert('Mot de passe temporaire = ARN2026');return}if(!users[mat])users[mat]={matricule:mat,password:'',statut:'En attente',created:new Date().toLocaleString(),logs:[]};saveLS();current=mat;loadFiche();show('fiche')}
+function login(){let mat=norm(document.getElementById('lMat').value);let mdp=document.getElementById('lMdp').value;if(!users[mat]){alert('Compte non créé');return}let real=users[mat].password||'ARN2026';if(mdp!==real){alert('Mauvais mot de passe');return}current=mat;loadFiche();show('fiche')}
+function logout(){current=null;show('accueil')}function adminLogin(){if(document.getElementById('adminMdp').value==='ARN2026'){show('admin');renderAdmin()}else alert('Faux')}
+function ajouterUn(){let mat=norm(document.getElementById('addOneMat').value);if(!valide(mat)){alert('Format invalide');return}if(liste.includes(mat)){alert('Existe déjà');return}liste.push(mat);liste.sort();saveLS();document.getElementById('addOneMat').value='';renderAdmin()}
+function renderAdmin(){let q=(document.getElementById('searchAdmin').value||'').toUpperCase();let f=liste.filter(m=>m.includes(q)||(users[m]&&(users[m].nom||'').toUpperCase().includes(q)));let h='';f.slice(0,300).forEach(m=>{let u=users[m]||{};let rempli=u.nom?'✅ Remplie':'⏳ Vide';h+=`<div style="border:1px solid #e2e8f0;border-radius:10px;padding:10px;margin-top:8px"><b>${m}</b> - ${rempli} - ${u.nom||''}<br><button onclick="voirDetailAdmin('${m}')" style="background:#1e40af;color:#fff;border:none;padding:6px 10px;border-radius:6px;margin-top:4px">📄 Voir fiche exacte</button> <button onclick="supprimerMat('${m}')" style="background:#fee2e2;color:#dc2626;border:1px solid #fecaca;padding:6px 10px;border-radius:6px">❌</button></div>`});document.getElementById('adminListe').innerHTML=h}
+function voirDetailAdmin(m){let u=users[m];if(!u||!u.nom){alert('Fiche pas encore remplie');return}document.getElementById('dMat').textContent=m;let html='';if(u.photoProfil)html+=`<img src="${u.photoProfil}" style="width:100px;height:100px;border-radius:50%"><br>`;for(let k in u){if(['photoProfil','pieceRecto','pieceVerso','logs','password'].includes(k))continue;html+=`<div style="border-bottom:1px dashed #ddd;padding:4px 0;font-size:13px"><b>${k}:</b> ${u[k]}</div>`}if(u.pieceRecto)html+=`<img src="${u.pieceRecto}" style="width:100%">`;if(u.pieceVerso)html+=`<img src="${u.pieceVerso}" style="width:100%">`;document.getElementById('dContent').innerHTML=html;document.getElementById('adminDetail').style.display='block'}
+function supprimerMat(m){if(!confirm('Supprimer '+m+' ?'))return;liste=liste.filter(x=>x!==m);delete users[m];saveLS();renderAdmin()}
+function loadFiche(){let u=users[current];document.getElementById('fMatricule').textContent=current;let fields=['pieceNum','nom','sexe','dob','lieu','nat','gs','pere','mere','sit','conj','urg','serie','fonc','prof','grade','eng','aff','chef','adr','email','c1','c2','sig'];fields.forEach(k=>{let el=document.getElementById('f_'+k);if(el&&u[k])el.value=u[k]});if(u.photoProfil){document.getElementById('prev_profil').src=u.photoProfil;document.getElementById('prev_profil').style.display='block'}}
+function sauverFiche(){let u=users[current];let req=['photoProfil','pieceNum','pieceRecto','pieceVerso','nom','sexe','dob','lieu','pere','mere','urg','serie','fonc','prof','grade','eng','aff','chef','adr','email','c1','c2','sig'];let nd=document.getElementById('f_newMdp').value;if(!u.password&&!nd){alert('Change le mot de passe obligatoire');return}let miss=[];req.forEach(k=>{if(k==='photoProfil'){if(!u[k])miss.push(k)}else{let el=document.getElementById('f_'+k);if(!el||!el.value)miss.push(k)}});if(miss.length){alert('TOUT OBLIGATOIRE manque: '+miss.join(','));return}['pieceNum','nom','sexe','dob','lieu','nat','gs','pere','mere','sit','conj','urg','serie','fonc','prof','grade','eng','aff','chef','adr','email','c1','c2','sig'].forEach(k=>{let el=document.getElementById('f_'+k);if(el)u[k]=el.value});if(nd)u.password=nd;document.getElementById('f_newMdp').value='';saveLS();alert('Fiche sauvée ! ADM la voit exactement.')}
+function savePhoto(input,key){let file=input.files[0];if(!file)return;let r=new FileReader();r.onload=e=>{users[current][key]=e.target.result;saveLS();if(key==='photoProfil'){document.getElementById('prev_profil').src=e.target.result;document.getElementById('prev_profil').style.display='block'}};r.readAsDataURL(file)}
+</script></body></html>istener('touchstart',function(e){e.preventDefault();drawing=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
 </script>
 </body>
 </html>lientX-rect.left)*(c.width/rect.width),y:(t.clientY-rect.top)*(c.height/rect.height)};}c.addEventListener('mousedown',function(e){drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('mousemove',function(e){if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('mouseup',function(){drawing=false;});c.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
