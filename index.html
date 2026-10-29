@@ -1,51 +1,104 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARN</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#f1f5f9}header{background:#fff;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.1)} .logo{background:#1e3a8a;color:#fff;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold} .card{width:96%;max-width:700px;margin:12px auto;background:#fff;padding:16px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)} .btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:bold;margin-top:10px;cursor:pointer} .btn-bleu{background:#1e40af;color:#fff} .btn-vert{background:#16a34a;color:#fff} .btn-gris{background:#e5e7eb} input,select{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:8px} .top{display:flex;gap:15px;align-items:center;justify-content:space-between;border:2px solid #1e3a8a;border-radius:12px;padding:12px;background:#f8fafc} .qr-only img{width:135px;height:135px;border:3px solid #1e3a8a;border-radius:10px;background:#fff;padding:3px}</style></head><body>
-<header><div style="display:flex;gap:10px;align-items:center"><div class="logo">ARN</div><div><b>Alliance pour la Renaissance Nutritionnelle</b><br><small style="color:#16a34a">FORMER - ACCOMPAGNER - IMPACTER</small></div></div></header>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARN - Alliance Renaissance Nutritionnelle</title>
+<style>
+body{font-family:Arial;background:#f1f5f9;margin:0}
+header{background:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px #ccc;position:sticky;top:0;z-index:10}
+.logo{background:#1e3a8a;color:#fff;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.card{width:96%;max-width:700px;margin:14px auto;background:#fff;padding:18px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.btn{width:100%;padding:13px;border:none;border-radius:10px;font-weight:bold;margin-top:10px;cursor:pointer}
+.btn-bleu{background:#1e40af;color:#fff}
+.btn-vert{background:#16a34a;color:#fff}
+.btn-gris{background:#e5e7eb}
+input{width:100%;padding:11px;margin:6px 0;border:1px solid #cbd5e1;border-radius:8px}
+.top-qr{display:flex;gap:16px;align-items:center;justify-content:space-between;border:2px solid #1e3a8a;border-radius:12px;padding:14px;background:#f8fafc}
+.qr-box img{width:135px;height:135px;border-radius:10px;background:#fff;border:1px solid #ddd}
+.photo-rond{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #1e3a8a}
+</style>
+</head>
+<body>
+<header>
+<div style="display:flex;gap:10px;align-items:center"><div class="logo">ARN</div><b>Alliance Renaissance Nutritionnelle</b></div>
+<div style="font-size:28px">☰</div>
+</header>
 
 <div id="accueil" class="card" style="text-align:center">
-<h2>ARN là où commence la vie nous agissons</h2>
-<button class="btn btn-vert" onclick="show('creation')">✅ Vérification matricule</button>
-<button class="btn btn-bleu" onclick="show('creation')">Créer mon compte</button>
-<button class="btn btn-bleu" style="background:#0f172a" onclick="show('connexion')">Se connecter</button>
-<button class="btn btn-gris" onclick="show('secretaireLogin')">⚙️ Secrétaire</button>
+<h3 style="background:linear-gradient(135deg,#1e3a8a,#16a34a);color:#fff;padding:18px;border-radius:10px">ARN là où commence la vie nous agissons</h3>
+<button class="btn btn-vert" onclick="showPage('creation')">✅ Vérification matricule</button>
+<button class="btn btn-bleu" onclick="showPage('creation')">Créer mon compte</button>
+<button class="btn btn-bleu" style="background:#0f172a" onclick="showPage('connexion')">Se connecter</button>
+<button class="btn btn-gris" onclick="showPage('secretaireLogin')">⚙️ Secrétaire</button>
 </div>
 
-<div id="creation" class="card" style="display:none"><h3>Créer un compte</h3><input id="cMat" placeholder="ARN 2026 0001"><input id="cNewPass" type="password" placeholder="Mot de passe"><button class="btn btn-vert" onclick="creerCompte()">Créer</button><button class="btn btn-gris" onclick="show('accueil')">Retour</button></div>
-<div id="connexion" class="card" style="display:none"><h3>Connexion</h3><input id="lMat" placeholder="Matricule"><input id="lMdp" type="password" placeholder="Mot de passe"><button class="btn btn-bleu" onclick="login()">Entrer</button><button class="btn btn-gris" onclick="show('accueil')">Retour</button></div>
-<div id="secretaireLogin" class="card" style="display:none"><h3>Secrétaire</h3><input id="adminMdp" type="password" placeholder="ARN2026"><button class="btn btn-bleu" onclick="loginSecretaire()">Entrer</button><button class="btn btn-gris" onclick="show('accueil')">Retour</button></div>
+<div id="creation" class="card" style="display:none">
+<h3>Créer un compte</h3>
+<input id="cMat" placeholder="ARN 2026 PRS 0001">
+<input id="cPass" type="password" placeholder="Mot de passe (min 4)">
+<button class="btn btn-vert" onclick="creerCompte()">Créer</button>
+<button class="btn btn-gris" onclick="showPage('accueil')">Retour</button>
+</div>
 
-<div id="admin" class="card" style="display:none"><h2>Secrétaire</h2><div style="display:flex;gap:6px"><input id="addOneMat" placeholder="ARN 2026 0001"><button onclick="ajouterUn()" style="width:110px;background:#2563eb;color:#fff;border:none;border-radius:6px">Ajouter</button></div><input id="searchAdmin" placeholder="Rechercher..." oninput="renderAdmin()" style="margin-top:10px;border:2px solid #1e40af"><div id="adminListe" style="margin-top:10px"></div>
-<div id="adminDetail" style="display:none;margin-top:12px"><h3 id="dMat"></h3><div class="top"><img id="dPhoto" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #1e40af;display:none"><div id="qrAdmin" class="qr-only"></div></div><div id="dContent" style="margin-top:12px"></div></div>
-<button class="btn btn-gris" onclick="show('accueil')">Accueil</button></div>
+<div id="connexion" class="card" style="display:none">
+<h3>Connexion</h3>
+<input id="lMat" placeholder="Matricule">
+<input id="lPass" type="password" placeholder="Mot de passe">
+<button class="btn btn-bleu" onclick="login()">Entrer</button>
+<button class="btn btn-gris" onclick="showPage('accueil')">Retour</button>
+</div>
 
-<div id="fiche" class="card" style="display:none"><h2>Fiche <span id="fMatricule"></span></h2><input type="file" accept="image/*" onchange="savePhoto(this)"><img id="prev_profil" style="display:none;width:90px;height:90px;border-radius:50%;margin-top:8px;border:2px solid #1e40af"><br><label>Nom complet</label><input id="f_nom"><label>Fonction</label><input id="f_fonc"><label>Affectation</label><input id="f_aff"><canvas id="sigCanvas" width="400" height="120" style="border:2px dashed #1e40af;width:100%;margin-top:10px"></canvas><div style="display:flex;gap:6px;margin-top:6px"><button onclick="clearSig()" style="background:#e5e7eb;padding:8px;border:none;border-radius:6px">Effacer</button><button onclick="saveSig()" style="background:#1e40af;color:#fff;padding:8px;border:none;border-radius:6px">Valider signature</button></div><img id="sigPreview" style="display:none;width:100%;margin-top:6px;border:1px solid #ccc"><button class="btn btn-vert" onclick="sauverFiche()">Enregistrer</button></div>
+<div id="secretaireLogin" class="card" style="display:none">
+<h3>Secrétaire - Mot de passe: ARN2026</h3>
+<input id="sPass" type="password">
+<button class="btn btn-bleu" onclick="loginSec()">Entrer</button>
+<button class="btn btn-gris" onclick="showPage('accueil')">Retour</button>
+</div>
+
+<div id="admin" class="card" style="display:none">
+<h3>Gestion Secrétaire</h3>
+<div style="display:flex;gap:6px"><input id="addMat" placeholder="ARN 2026 PRS 0001"><button onclick="ajouter()" style="width:100px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:bold">Ajouter</button></div>
+<input id="search" placeholder="Rechercher..." oninput="render()" style="margin-top:10px;border:2px solid #1e40af">
+<div id="liste"></div>
+<div id="detail" style="display:none;margin-top:16px;border:2px solid #1e40af;border-radius:14px;padding:14px">
+<h3 id="dMat" style="color:#1e3a8a;margin-bottom:12px"></h3>
+<div class="top-qr"><img id="dPhoto" class="photo-rond" style="display:none"><div id="dQR" class="qr-box"></div></div>
+<div id="dInfos" style="margin-top:12px"></div>
+<button class="btn btn-gris" onclick="document.getElementById('detail').style.display='none'">Fermer</button>
+</div>
+<button class="btn btn-gris" onclick="showPage('accueil')">Accueil</button>
+</div>
+
+<div id="fiche" class="card" style="display:none">
+<h3>Fiche: <span id="fMat"></span></h3>
+<input type="file" accept="image/*" onchange="savePhoto(this)">
+<img id="fPhoto" class="photo-rond" style="display:none;margin-top:10px">
+<input id="f_nom" placeholder="Nom complet"><input id="f_fonc" placeholder="Fonction"><input id="f_aff" placeholder="Affectation">
+<canvas id="sig" width="500" height="180" style="border:2px dashed #1e40af;border-radius:8px;width:100%;margin-top:10px"></canvas>
+<div style="display:flex;gap:8px"><button class="btn btn-gris" style="width:auto" onclick="clearSig()">Effacer</button><button class="btn btn-bleu" style="width:auto" onclick="saveSig()">Valider signature</button></div>
+<img id="fSig" style="display:none;width:100%;margin-top:8px;border:1px solid #ccc">
+<button class="btn btn-vert" onclick="saveFiche()">💾 Enregistrer</button>
+<button class="btn btn-gris" onclick="showPage('accueil')">Déconnexion</button>
+</div>
 
 <script>
-var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');
-var users=JSON.parse(localStorage.getItem('arn_users')||'{}');
-if(!liste.length){liste=[];for(let i=1;i<=1000;i++)liste.push('ARN 2026 '+String(i).padStart(4,'0'));liste.push('ARN 2026 PRS 0001')}
-var current=null;
-function show(id){['accueil','creation','connexion','secretaireLogin','admin','fiche'].forEach(x=>{let e=document.getElementById(x);if(e)e.style.display='none'});document.getElementById(id).style.display='block'}
-function norm(m){return m.trim().toUpperCase().replace(/\s+/g,' ')}
-function valide(m){return /^ARN \d{4}( [A-Z]+)* \d{1,8}$/.test(m)}
-function saveLS(){localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));localStorage.setItem('arn_users',JSON.stringify(users))}
-function makeQR(text,id){let enc=encodeURIComponent(text);document.getElementById(id).innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${enc}">`}
-function creerCompte(){let mat=norm(document.getElementById('cMat').value);let np=document.getElementById('cNewPass').value;if(!valide(mat)){alert('Format invalide');return}if(!liste.includes(mat)){alert('Non généré');return}if(!users[mat])users[mat]={};users[mat].password=np;saveLS();current=mat;show('fiche')}
-function login(){let mat=norm(document.getElementById('lMat').value);let mdp=document.getElementById('lMdp').value;if(!users[mat]||users[mat].password!==mdp){alert('Erreur');return}current=mat;show('fiche')}
-function loginSecretaire(){if(document.getElementById('adminMdp').value==='ARN2026'){show('admin');renderAdmin()}else alert('Mot de passe incorrect')}
-function ajouterUn(){let mat=norm(document.getElementById('addOneMat').value);if(!valide(mat)){alert('Format invalide');return}if(!liste.includes(mat)){liste.push(mat);liste.sort();saveLS()}document.getElementById('searchAdmin').value=mat;renderAdmin()}
-function renderAdmin(){let f=document.getElementById('searchAdmin').value.toUpperCase();let aff=f?liste.filter(m=>m.includes(f)):liste.slice().reverse().slice(0,100);let h=`<small>${liste.length} matricules</small>`;aff.forEach(m=>{let u=users[m]||{};h+=`<div style="border:1px solid #ddd;padding:8px;margin-top:6px;border-radius:8px"><b>${m}</b> ${u.nom||''} <button onclick="voirDetailAdmin('${m}')" style="background:#1e40af;color:#fff;border:none;padding:5px 10px;border-radius:5px">Voir</button></div>`});document.getElementById('adminListe').innerHTML=h}
-function voirDetailAdmin(m){let u=users[m]||{};document.getElementById('adminDetail').style.display='block';document.getElementById('dMat').textContent=m;let ph=document.getElementById('dPhoto');if(u.photoProfil){ph.src=u.photoProfil;ph.style.display='block'}else ph.style.display='none';let html='';for(let k in u){if(['photoProfil','password','signature'].includes(k))continue;if(!u[k])continue;html+=`<div style="padding:4px 0;border-bottom:1px dashed #ddd"><b>${k}:</b> ${u[k]}</div>`}if(u.signature)html+=`<div style="margin-top:8px"><b>Signature:</b><br><img src="${u.signature}" style="width:100%;border:1px solid #000;border-radius:6px"></div>`;document.getElementById('dContent').innerHTML=html;let nom=u.nom||m;let lien=`https://arn657079-tech.github.io/?verif=${encodeURIComponent(m)}`;let contenu=`${nom}\n${lien}`;makeQR(contenu,'qrAdmin');document.getElementById('adminDetail').scrollIntoView({behavior:'smooth'})}
-function savePhoto(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{if(!users[current])users[current]={};users[current].photoProfil=e.target.result;saveLS();document.getElementById('prev_profil').src=e.target.result;document.getElementById('prev_profil').style.display='block'};r.readAsDataURL(f)}
-function sauverFiche(){let u=users[current]||{};u.nom=document.getElementById('f_nom').value;u.fonc=document.getElementById('f_fonc').value;u.aff=document.getElementById('f_aff').value;users[current]=u;saveLS();alert('Enregistré')}
-function clearSig(){let c=document.getElementById('sigCanvas');c.getContext('2d').clearRect(0,0,c.width,c.height)}
-function saveSig(){let c=document.getElementById('sigCanvas');let d=c.toDataURL();if(!users[current])users[current]={};users[current].signature=d;document.getElementById('sigPreview').src=d;document.getElementById('sigPreview').style.display='block';saveLS()}
-</script></body></html>]||{};h+=`<div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-top:6px"><b>${m}</b> - ${u.nom||'Vide'}<br><button onclick="voirDetailAdmin('${m}')" style="background:#1e40af;color:#fff;border:none;padding:6px 12px;border-radius:5px;margin-right:4px">Voir</button><button onclick="supprimerMat('${m}')" style="background:#fee2e2;color:red;border:1px solid #fecaca;padding:6px 10px;border-radius:5px">❌</button></div>`});document.getElementById('adminListe').innerHTML=h}
-function voirDetailAdmin(m){
-  let u=users[m]||{};
-  document.getElementById('dMat').textContent=m;
-  let photo=document.getElementById('dPhoto');
-  if(u.photoProfil){photo.src=u.photoProfil;photo.style.display='block';}else{photo.style.display='none';}
-  let trad={ nom:"Nom complet", sexe:"Sexe", dob:"Date de naissance", lieu:"Lieu de naissance", nat:"Nationalité", gs:"Groupe sanguin", pere:"Père", mere:"Mère", sit:"Situation matrimoniale", conj:"Conjoint / Enfants", urg:"Contact d'urgence", serie:"Série", fonc:"Fonction", prof:"Profession", grade:"Grade", eng:"Date d'engagement", aff:"Affectation", adr:"Adresse", email:"Adresse email", c1:"Contact 1", c2:"Contact 2" };
+var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');var users=JSON.parse(localStorage.getItem('arn_users')||'{}');if(liste.length==0){liste=[];for(var i=1;i<=1000;i++){var n=('000'+i);liste.push('ARN 2026 '+n.slice(-4));}liste.push('ARN 2026 PRS 0001');localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));}var current=null;
+function showPage(id){var p=['accueil','creation','connexion','secretaireLogin','admin','fiche'];for(var j=0;j<p.length;j++){var e=document.getElementById(p[j]);if(e)e.style.display='none';}document.getElementById(id).style.display='block';window.scrollTo(0,0);}
+function norm(s){return s.trim().toUpperCase().replace(/\s+/g,' ');}function valide(s){return /^ARN \d{4}( [A-Z]+)* \d{1,8}$/.test(s);}function saveLS(){localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));localStorage.setItem('arn_users',JSON.stringify(users));}
+function creerCompte(){var m=norm(document.getElementById('cMat').value);var p=document.getElementById('cPass').value;if(!valide(m)||liste.indexOf(m)===-1){alert('Matricule invalide');return;}if(p.length<4){alert('Mot de passe trop court');return;}if(!users[m])users[m]={matricule:m};users[m].password=p;saveLS();current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
+function login(){var m=norm(document.getElementById('lMat').value);var p=document.getElementById('lPass').value;if(!users[m]||users[m].password!==p){alert('Erreur');return;}current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
+function loginSec(){if(document.getElementById('sPass').value==='ARN2026'){showPage('admin');render();}else alert('Mot de passe incorrect');}
+function ajouter(){var m=norm(document.getElementById('addMat').value);if(!valide(m)){alert('Format invalide');return;}if(liste.indexOf(m)===-1){liste.push(m);liste.sort();saveLS();}document.getElementById('search').value=m;render();}
+function render(){var f=document.getElementById('search').value.toUpperCase();var aff=[];if(f){for(var i=0;i<liste.length;i++){if(liste[i].indexOf(f)!==-1)aff.push(liste[i]);}}else{aff=liste.slice().reverse().slice(0,100);}var h='<small>'+liste.length+' matricules</small>';for(var k=0;k<aff.length;k++){var mm=aff[k];var u=users[mm]||{};var nm=u.nom||'<span style=color:#94a3b8>vide</span>';h+='<div style="border:1px solid #ddd;padding:8px;margin-top:6px;border-radius:8px;display:flex;justify-content:space-between"><div><b>'+mm+'</b><br>'+nm+'</div><button onclick="voirDetail(\''+mm+'\')" style="background:#1e40af;color:#fff;border:none;padding:6px 12px;border-radius:6px">Voir</button></div>';}document.getElementById('liste').innerHTML=h;}
+function voirDetail(m){var u=users[m]||{};document.getElementById('detail').style.display='block';document.getElementById('dMat').textContent=m;var ph=document.getElementById('dPhoto');if(u.photoProfil){ph.src=u.photoProfil;ph.style.display='block';}else ph.style.display='none';var html='';for(var key in u){if(key==='photoProfil'||key==='password'||key==='signature')continue;if(!u[key])continue;html+='<div style="padding:5px 0;border-bottom:1px dashed #e2e8f0"><b>'+key+':</b> '+u[key]+'</div>';}if(u.signature)html+='<div style="margin-top:10px"><b>Signature:</b><br><img src="'+u.signature+'" style="width:100%;border:1px solid #000;border-radius:8px"></div>';if(!html)html='<i style="color:#999">Fiche vide</i>';document.getElementById('dInfos').innerHTML=html;var nomAff=u.nom||m;var lien='https://arn657079-tech.github.io/?verif='+encodeURIComponent(m);var qrContent=nomAff+'\n'+lien;document.getElementById('dQR').innerHTML='<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(qrContent)+'">';}
+function savePhoto(input){var f=input.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){if(!users[current])users[current]={};users[current].photoProfil=e.target.result;saveLS();var img=document.getElementById('fPhoto');img.src=e.target.result;img.style.display='block';};r.readAsDataURL(f);}
+function saveFiche(){if(!users[current])users[current]={};users[current].nom=document.getElementById('f_nom').value;users[current].fonc=document.getElementById('f_fonc').value;users[current].aff=document.getElementById('f_aff').value;saveLS();alert('Fiche enregistrée');}
+function clearSig(){var c=document.getElementById('sig');c.getContext('2d').clearRect(0,0,c.width,c.height);}function saveSig(){var c=document.getElementById('sig');var data=c.toDataURL();if(data.length<1000){alert('Dessine ta signature');return;}if(!users[current])users[current]={};users[current].signature=data;saveLS();var img=document.getElementById('fSig');img.src=data;img.style.display='block';alert('Signature validée');}
+(function(){var c=document.getElementById('sig');if(!c)return;var ctx=c.getContext('2d');var drawing=false;function getPos(e){var rect=c.getBoundingClientRect();var t=e.touches?e.touches[0]:e;return {x:(t.clientX-rect.left)*(c.width/rect.width),y:(t.clientY-rect.top)*(c.height/rect.height)};}c.addEventListener('mousedown',function(e){drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('mousemove',function(e){if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('mouseup',function(){drawing=false;});c.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
+</script>
+</body>
+  </html>mere:"Mère", sit:"Situation matrimoniale", conj:"Conjoint / Enfants", urg:"Contact d'urgence", serie:"Série", fonc:"Fonction", prof:"Profession", grade:"Grade", eng:"Date d'engagement", aff:"Affectation", adr:"Adresse", email:"Adresse email", c1:"Contact 1", c2:"Contact 2" };
   let html=''; for(let k in u){ if(['photoProfil','password','signature','matricule','created'].includes(k))continue; let label=trad[k]||k; let val=u[k]; if(!val)continue; html+=`<div style="font-size:14px;border-bottom:1px dashed #ddd;padding:6px 0"><b>${label} :</b> ${val}</div>`; }
   if(u.signature)html+=`<div style="margin-top:10px"><b>Signature :</b><br><img src="${u.signature}" style="width:100%;border:1px solid #000;border-radius:6px"></div>`;
   document.getElementById('dContent').innerHTML=html||"<i>Aucune info</i>";
