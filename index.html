@@ -3,99 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ARN - Alliance Renaissance Nutritionnelle</title>
+<title>ARN</title>
 <style>
-body{font-family:Arial;background:#f1f5f9;margin:0}
-header{background:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px #ccc;position:sticky;top:0;z-index:10}
-.logo{background:#1e3a8a;color:#fff;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
-.card{width:96%;max-width:700px;margin:14px auto;background:#fff;padding:18px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.btn{width:100%;padding:13px;border:none;border-radius:10px;font-weight:bold;margin-top:10px;cursor:pointer}
-.btn-bleu{background:#1e40af;color:#fff}
-.btn-vert{background:#16a34a;color:#fff}
-.btn-gris{background:#e5e7eb}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f1f5f9}
+header{background:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px #ccc}
+.logo{background:#1e3a8a;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.card{width:96%;max-width:700px;margin:14px auto;background:#fff;padding:18px;border-radius:14px}
+.btn{width:100%;padding:13px;border:none;border-radius:10px;font-weight:bold;margin-top:10px}
+.btn-bleu{background:#1e40af;color:#fff}.btn-vert{background:#16a34a;color:#fff}.btn-gris{background:#e5e7eb}
 input{width:100%;padding:11px;margin:6px 0;border:1px solid #cbd5e1;border-radius:8px}
 .top-qr{display:flex;gap:16px;align-items:center;justify-content:space-between;border:2px solid #1e3a8a;border-radius:12px;padding:14px;background:#f8fafc}
-.qr-box img{width:135px;height:135px;border-radius:10px;background:#fff;border:1px solid #ddd}
+.qr-box img{width:130px;height:130px;border-radius:10px}
 .photo-rond{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #1e3a8a}
 </style>
 </head>
 <body>
-<header>
-<div style="display:flex;gap:10px;align-items:center"><div class="logo">ARN</div><b>Alliance Renaissance Nutritionnelle</b></div>
-<div style="font-size:28px">☰</div>
-</header>
+<header><div style="display:flex;gap:10px;align-items:center"><div class="logo">ARN</div><b>Alliance Renaissance Nutritionnelle</b></div><div>☰</div></header>
 
 <div id="accueil" class="card" style="text-align:center">
 <h3 style="background:linear-gradient(135deg,#1e3a8a,#16a34a);color:#fff;padding:18px;border-radius:10px">ARN là où commence la vie nous agissons</h3>
-<button class="btn btn-vert" onclick="showPage('creation')">✅ Vérification matricule</button>
-<button class="btn btn-bleu" onclick="showPage('creation')">Créer mon compte</button>
+<button class="btn btn-vert" onclick="showPage('creation')">Verifier matricule</button>
+<button class="btn btn-bleu" onclick="showPage('creation')">Creer mon compte</button>
 <button class="btn btn-bleu" style="background:#0f172a" onclick="showPage('connexion')">Se connecter</button>
-<button class="btn btn-gris" onclick="showPage('secretaireLogin')">⚙️ Secrétaire</button>
+<button class="btn btn-gris" onclick="showPage('secretaireLogin')">Secretaire</button>
 </div>
 
-<div id="creation" class="card" style="display:none">
-<h3>Créer un compte</h3>
-<input id="cMat" placeholder="ARN 2026 PRS 0001">
-<input id="cPass" type="password" placeholder="Mot de passe (min 4)">
-<button class="btn btn-vert" onclick="creerCompte()">Créer</button>
-<button class="btn btn-gris" onclick="showPage('accueil')">Retour</button>
-</div>
-
-<div id="connexion" class="card" style="display:none">
-<h3>Connexion</h3>
-<input id="lMat" placeholder="Matricule">
-<input id="lPass" type="password" placeholder="Mot de passe">
-<button class="btn btn-bleu" onclick="login()">Entrer</button>
-<button class="btn btn-gris" onclick="showPage('accueil')">Retour</button>
-</div>
-
-<div id="secretaireLogin" class="card" style="display:none">
-<h3>Secrétaire - Mot de passe: ARN2026</h3>
-<input id="sPass" type="password">
-<button class="btn btn-bleu" onclick="loginSec()">Entrer</button>
-<button class="btn btn-gris" onclick="showPage('accueil')">Retour</button>
-</div>
+<div id="creation" class="card" style="display:none"><h3>Creer un compte</h3><input id="cMat" placeholder="ARN 2026 PRS 0001"><input id="cPass" type="password" placeholder="Mot de passe"><button class="btn btn-vert" onclick="creerCompte()">Creer</button><button class="btn btn-gris" onclick="showPage('accueil')">Retour</button></div>
+<div id="connexion" class="card" style="display:none"><h3>Connexion</h3><input id="lMat" placeholder="Matricule"><input id="lPass" type="password" placeholder="Mot de passe"><button class="btn btn-bleu" onclick="login()">Entrer</button><button class="btn btn-gris" onclick="showPage('accueil')">Retour</button></div>
+<div id="secretaireLogin" class="card" style="display:none"><h3>Secretaire - ARN2026</h3><input id="sPass" type="password"><button class="btn btn-bleu" onclick="loginSec()">Entrer</button><button class="btn btn-gris" onclick="showPage('accueil')">Retour</button></div>
 
 <div id="admin" class="card" style="display:none">
-<h3>Gestion Secrétaire</h3>
-<div style="display:flex;gap:6px"><input id="addMat" placeholder="ARN 2026 PRS 0001"><button onclick="ajouter()" style="width:100px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:bold">Ajouter</button></div>
+<h3>Gestion Secretaire</h3>
+<div style="display:flex;gap:6px"><input id="addMat" placeholder="ARN 2026 PRS 0001"><button onclick="ajouter()" style="width:90px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:bold">Ajouter</button></div>
 <input id="search" placeholder="Rechercher..." oninput="render()" style="margin-top:10px;border:2px solid #1e40af">
 <div id="liste"></div>
 <div id="detail" style="display:none;margin-top:16px;border:2px solid #1e40af;border-radius:14px;padding:14px">
-<h3 id="dMat" style="color:#1e3a8a;margin-bottom:12px"></h3>
+<h3 id="dMat" style="color:#1e3a8a"></h3>
 <div class="top-qr"><img id="dPhoto" class="photo-rond" style="display:none"><div id="dQR" class="qr-box"></div></div>
 <div id="dInfos" style="margin-top:12px"></div>
 <button class="btn btn-gris" onclick="document.getElementById('detail').style.display='none'">Fermer</button>
 </div>
-<button class="btn btn-gris" onclick="showPage('accueil')">Accueil</button>
 </div>
 
 <div id="fiche" class="card" style="display:none">
 <h3>Fiche: <span id="fMat"></span></h3>
 <input type="file" accept="image/*" onchange="savePhoto(this)">
 <img id="fPhoto" class="photo-rond" style="display:none;margin-top:10px">
-<input id="f_nom" placeholder="Nom complet"><input id="f_fonc" placeholder="Fonction"><input id="f_aff" placeholder="Affectation">
+<input id="f_nom" placeholder="Nom complet">
+<input id="f_fonc" placeholder="Fonction">
+<input id="f_aff" placeholder="Affectation">
 <canvas id="sig" width="500" height="180" style="border:2px dashed #1e40af;border-radius:8px;width:100%;margin-top:10px"></canvas>
-<div style="display:flex;gap:8px"><button class="btn btn-gris" style="width:auto" onclick="clearSig()">Effacer</button><button class="btn btn-bleu" style="width:auto" onclick="saveSig()">Valider signature</button></div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn btn-gris" style="width:auto" onclick="clearSig()">Effacer</button>
+<button class="btn btn-bleu" style="width:auto" onclick="saveSig()">Valider</button>
+</div>
 <img id="fSig" style="display:none;width:100%;margin-top:8px;border:1px solid #ccc">
-<button class="btn btn-vert" onclick="saveFiche()">💾 Enregistrer</button>
-<button class="btn btn-gris" onclick="showPage('accueil')">Déconnexion</button>
+<button class="btn btn-vert" onclick="saveFiche()">Enregistrer</button>
+<button class="btn btn-gris" onclick="showPage('accueil')">Deconnexion</button>
 </div>
 
 <script>
-var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');var users=JSON.parse(localStorage.getItem('arn_users')||'{}');if(liste.length==0){liste=[];for(var i=1;i<=1000;i++){var n=('000'+i);liste.push('ARN 2026 '+n.slice(-4));}liste.push('ARN 2026 PRS 0001');localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));}var current=null;
-function showPage(id){var p=['accueil','creation','connexion','secretaireLogin','admin','fiche'];for(var j=0;j<p.length;j++){var e=document.getElementById(p[j]);if(e)e.style.display='none';}document.getElementById(id).style.display='block';window.scrollTo(0,0);}
-function norm(s){return s.trim().toUpperCase().replace(/\s+/g,' ');}function valide(s){return /^ARN \d{4}( [A-Z]+)* \d{1,8}$/.test(s);}function saveLS(){localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));localStorage.setItem('arn_users',JSON.stringify(users));}
-function creerCompte(){var m=norm(document.getElementById('cMat').value);var p=document.getElementById('cPass').value;if(!valide(m)||liste.indexOf(m)===-1){alert('Matricule invalide');return;}if(p.length<4){alert('Mot de passe trop court');return;}if(!users[m])users[m]={matricule:m};users[m].password=p;saveLS();current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
+var liste=JSON.parse(localStorage.getItem('listeMatriculesARN')||'[]');
+var users=JSON.parse(localStorage.getItem('arn_users')||'{}');
+if(liste.length==0){liste=[];for(var i=1;i<=1000;i++){var p=('000'+i);liste.push('ARN 2026 '+p.slice(-4));}liste.push('ARN 2026 PRS 0001');}
+var current=null;
+function showPage(id){var pages=['accueil','creation','connexion','secretaireLogin','admin','fiche'];for(var i=0;i<pages.length;i++){var el=document.getElementById(pages[i]);if(el)el.style.display='none';}document.getElementById(id).style.display='block';}
+function norm(s){return s.trim().toUpperCase().replace(/\s+/g,' ');}
+function valide(s){return /^ARN \d{4}( [A-Z]+)* \d{1,8}$/.test(s);}
+function saveLS(){localStorage.setItem('listeMatriculesARN',JSON.stringify(liste));localStorage.setItem('arn_users',JSON.stringify(users));}
+function creerCompte(){var m=norm(document.getElementById('cMat').value);var p=document.getElementById('cPass').value;if(!valide(m)||liste.indexOf(m)===-1){alert('Matricule invalide');return;}if(p.length<4){alert('Mot de passe court');return;}if(!users[m])users[m]={};users[m].matricule=m;users[m].password=p;saveLS();current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
 function login(){var m=norm(document.getElementById('lMat').value);var p=document.getElementById('lPass').value;if(!users[m]||users[m].password!==p){alert('Erreur');return;}current=m;document.getElementById('fMat').textContent=m;showPage('fiche');}
 function loginSec(){if(document.getElementById('sPass').value==='ARN2026'){showPage('admin');render();}else alert('Mot de passe incorrect');}
 function ajouter(){var m=norm(document.getElementById('addMat').value);if(!valide(m)){alert('Format invalide');return;}if(liste.indexOf(m)===-1){liste.push(m);liste.sort();saveLS();}document.getElementById('search').value=m;render();}
-function render(){var f=document.getElementById('search').value.toUpperCase();var aff=[];if(f){for(var i=0;i<liste.length;i++){if(liste[i].indexOf(f)!==-1)aff.push(liste[i]);}}else{aff=liste.slice().reverse().slice(0,100);}var h='<small>'+liste.length+' matricules</small>';for(var k=0;k<aff.length;k++){var mm=aff[k];var u=users[mm]||{};var nm=u.nom||'<span style=color:#94a3b8>vide</span>';h+='<div style="border:1px solid #ddd;padding:8px;margin-top:6px;border-radius:8px;display:flex;justify-content:space-between"><div><b>'+mm+'</b><br>'+nm+'</div><button onclick="voirDetail(\''+mm+'\')" style="background:#1e40af;color:#fff;border:none;padding:6px 12px;border-radius:6px">Voir</button></div>';}document.getElementById('liste').innerHTML=h;}
-function voirDetail(m){var u=users[m]||{};document.getElementById('detail').style.display='block';document.getElementById('dMat').textContent=m;var ph=document.getElementById('dPhoto');if(u.photoProfil){ph.src=u.photoProfil;ph.style.display='block';}else ph.style.display='none';var html='';for(var key in u){if(key==='photoProfil'||key==='password'||key==='signature')continue;if(!u[key])continue;html+='<div style="padding:5px 0;border-bottom:1px dashed #e2e8f0"><b>'+key+':</b> '+u[key]+'</div>';}if(u.signature)html+='<div style="margin-top:10px"><b>Signature:</b><br><img src="'+u.signature+'" style="width:100%;border:1px solid #000;border-radius:8px"></div>';if(!html)html='<i style="color:#999">Fiche vide</i>';document.getElementById('dInfos').innerHTML=html;var nomAff=u.nom||m;var lien='https://arn657079-tech.github.io/?verif='+encodeURIComponent(m);var qrContent=nomAff+'\n'+lien;document.getElementById('dQR').innerHTML='<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(qrContent)+'">';}
+function render(){var f=document.getElementById('search').value.toUpperCase();var aff=[];if(f){for(var i=0;i<liste.length;i++){if(liste[i].indexOf(f)!==-1)aff.push(liste[i]);}}else{aff=liste.slice().reverse().slice(0,100);}var h='<small>'+liste.length+' matricules</small>';for(var i=0;i<aff.length;i++){var mm=aff[i];var u=users[mm]||{};var nm=u.nom?u.nom:'<span style=color:#94a3b8>vide</span>';h=h+'<div style="border:1px solid #ddd;padding:8px;margin-top:6px;border-radius:8px;display:flex;justify-content:space-between"><div><b>'+mm+'</b><br>'+nm+'</div><button onclick="voirDetail(\''+mm+'\')" style="background:#1e40af;color:#fff;border:none;padding:6px 12px;border-radius:6px">Voir</button></div>';}document.getElementById('liste').innerHTML=h;}
+function voirDetail(m){
+var u=users[m]||{};
+document.getElementById('detail').style.display='block';
+document.getElementById('dMat').textContent=m;
+var ph=document.getElementById('dPhoto');
+if(u.photoProfil){ph.src=u.photoProfil;ph.style.display='block';}else{ph.style.display='none';}
+var html='';
+if(u.nom){html=html+'<div><b>Nom:</b> '+u.nom+'</div>';}
+if(u.fonc){html=html+'<div><b>Fonction:</b> '+u.fonc+'</div>';}
+if(u.aff){html=html+'<div><b>Affectation:</b> '+u.aff+'</div>';}
+if(u.signature){html=html+'<div style="margin-top:10px"><b>Signature:</b><br><img src="'+u.signature+'" style="width:100%;border:1px solid #000;border-radius:8px"></div>';}
+if(html==''){html='<i style="color:#999">Fiche vide</i>';}
+document.getElementById('dInfos').innerHTML=html;
+var nomAff=u.nom?u.nom:m;
+var lien='https://arn657079-tech.github.io/ARN/?verif='+encodeURIComponent(m);
+var contenu=nomAff+'\n'+lien;
+document.getElementById('dQR').innerHTML='<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(contenu)+'">';
+}
 function savePhoto(input){var f=input.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){if(!users[current])users[current]={};users[current].photoProfil=e.target.result;saveLS();var img=document.getElementById('fPhoto');img.src=e.target.result;img.style.display='block';};r.readAsDataURL(f);}
-function saveFiche(){if(!users[current])users[current]={};users[current].nom=document.getElementById('f_nom').value;users[current].fonc=document.getElementById('f_fonc').value;users[current].aff=document.getElementById('f_aff').value;saveLS();alert('Fiche enregistrée');}
-function clearSig(){var c=document.getElementById('sig');c.getContext('2d').clearRect(0,0,c.width,c.height);}function saveSig(){var c=document.getElementById('sig');var data=c.toDataURL();if(data.length<1000){alert('Dessine ta signature');return;}if(!users[current])users[current]={};users[current].signature=data;saveLS();var img=document.getElementById('fSig');img.src=data;img.style.display='block';alert('Signature validée');}
-(function(){var c=document.getElementById('sig');if(!c)return;var ctx=c.getContext('2d');var drawing=false;function getPos(e){var rect=c.getBoundingClientRect();var t=e.touches?e.touches[0]:e;return {x:(t.clientX-rect.left)*(c.width/rect.width),y:(t.clientY-rect.top)*(c.height/rect.height)};}c.addEventListener('mousedown',function(e){drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('mousemove',function(e){if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('mouseup',function(){drawing=false;});c.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
+function saveFiche(){if(!users[current])users[current]={};users[current].nom=document.getElementById('f_nom').value;users[current].fonc=document.getElementById('f_fonc').value;users[current].aff=document.getElementById('f_aff').value;saveLS();alert('Enregistre');}
+function clearSig(){document.getElementById('sig').getContext('2d').clearRect(0,0,500,180);}
+function saveSig(){var c=document.getElementById('sig');var data=c.toDataURL();if(data.length<1000){alert('Dessine');return;}if(!users[current])users[current]={};users[current].signature=data;saveLS();document.getElementById('fSig').src=data;document.getElementById('fSig').style.display='block';}
+(function(){var c=document.getElementById('sig');if(!c)return;var ctx=c.getContext('2d');var drawing=false;function pos(e){var rect=c.getBoundingClientRect();var t=e.touches?e.touches[0]:e;return {x:(t.clientX-rect.left)*(c.width/rect.width),y:(t.clientY-rect.top)*(c.height/rect.height)};}c.addEventListener('mousedown',function(e){drawing=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('mousemove',function(e){if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('mouseup',function(){drawing=false;});c.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
+</script>
+</body>
+</html>lientX-rect.left)*(c.width/rect.width),y:(t.clientY-rect.top)*(c.height/rect.height)};}c.addEventListener('mousedown',function(e){drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('mousemove',function(e){if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('mouseup',function(){drawing=false;});c.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});c.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var p=getPos(e);ctx.lineTo(p.x,p.y);ctx.lineWidth=2;ctx.stroke();});c.addEventListener('touchend',function(){drawing=false;});})();
 </script>
 </body>
   </html>mere:"Mère", sit:"Situation matrimoniale", conj:"Conjoint / Enfants", urg:"Contact d'urgence", serie:"Série", fonc:"Fonction", prof:"Profession", grade:"Grade", eng:"Date d'engagement", aff:"Affectation", adr:"Adresse", email:"Adresse email", c1:"Contact 1", c2:"Contact 2" };
