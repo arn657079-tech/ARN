@@ -12,21 +12,23 @@ header{display:flex;justify-content:space-between;align-items:center;padding:10p
 .logo .cercle{width:54px;height:54px;background:#0d47a1;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
 .logo b{font-size:14px;line-height:1.25}
 .logo i{color:#2e7d32;font-size:10px;font-style:normal;font-weight:bold}
-#btnMenu{font-size:28px;padding:8px;cursor:pointer;position:relative}
+#btnMenu{font-size:30px;padding:10px 14px;cursor:pointer;position:relative;z-index:3000;background:white;border-radius:10px}
 #notifRouge{position:absolute;top:2px;right:2px;background:#e53935;color:white;font-size:11px;font-weight:900;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center;animation:clignote 1s infinite}
 @keyframes clignote{0%,100%{opacity:1}50%{opacity:.3}}
-#menu{position:fixed;top:0;right:0;width:280px;height:100%;background:white;z-index:2000;display:none;padding:15px;box-shadow:-2px 0 12px rgba(0,0,0,.25)}
-#menu div{padding:14px 10px;border-bottom:1px solid #eee;cursor:pointer}
+#overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:1999;display:none}
+#menu{position:fixed;top:0;right:0;width:280px;height:100%;background:white;z-index:2000;display:none;padding:15px;box-shadow:-2px 0 12px rgba(0,0,0,.25);overflow-y:auto}
+#menu div{padding:16px 10px;border-bottom:1px solid #eee;cursor:pointer;font-size:15px}
 .hero{background:linear-gradient(90deg,#0d47a1,#2e9e5b);margin:12px;border-radius:16px;padding:20px;text-align:center;color:white}
 .hero h1{font-size:22px;line-height:1.3}
-.hero img{width:100%;height:320px;object-fit:cover;border-radius:14px;margin-top:12px}
-.btn{padding:15px;border-radius:10px;font-weight:800;text-align:center;margin:8px 14px;cursor:pointer;font-size:15px}
+.hero img{width:100%;height:340px;object-fit:cover;border-radius:14px;margin-top:12px}
+.btn{padding:16px;border-radius:12px;font-weight:800;text-align:center;margin:8px 14px;cursor:pointer;font-size:15px;position:relative;z-index:10;user-select:none}
+.btn:active{transform:scale(.98)}
 .vert{background:#2e9e5b;color:white}.bleu{background:#0d47a1;color:white}.noir{background:#1a2340;color:white}.gris{background:#fff;border:1px solid #ddd;color:#333}
 .orangeBtn{background:#ef6c00;color:white}
-.box{background:white;margin:12px;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.box{background:white;margin:12px;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.05);position:relative;z-index:10}
 .box h2{margin-bottom:10px;font-size:19px}
 label{font-size:13px;font-weight:700;color:#333;display:block;margin:12px 0 5px}
-.box input,.box select,.box textarea{width:100%;padding:13px;border:1.5px solid #e0e0e0;border-radius:12px;font-size:14px;background:#fafafa}
+.box input,.box select,.box textarea{width:100%;padding:14px;border:1.5px solid #e0e0e0;border-radius:12px;font-size:14px;background:#fafafa;pointer-events:auto}
 .box input:focus,.box select:focus{border-color:#0d47a1;background:white;outline:none}
 .box input[readonly]{background:#eef2f7;color:#0d47a1;font-weight:800}
 input:disabled,select:disabled,textarea:disabled{background:#eeeeee!important;color:#999!important;cursor:not-allowed}
@@ -34,9 +36,9 @@ input:disabled,select:disabled,textarea:disabled{background:#eeeeee!important;co
 .titre-niveau.vert2{background:#2e9e5b}
 .titre-niveau.orange{background:#ef6c00}
 .ligne{display:flex;justify-content:space-between;align-items:center;border:1px solid #eee;border-radius:12px;padding:10px;margin-bottom:8px;gap:8px}
-.petit{background:#0d47a1;color:white;border:none;padding:9px 12px;border-radius:8px;font-weight:700}
-.rouge{background:#ffebee;color:#e53935;border:none;padding:8px 10px;border-radius:8px}
-.btnRouge{background:#e53935!important;color:white!important;border:none;padding:10px 14px;border-radius:8px;font-weight:800}
+.petit{background:#0d47a1;color:white;border:none;padding:10px 12px;border-radius:8px;font-weight:700;cursor:pointer}
+.rouge{background:#ffebee;color:#e53935;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
+.btnRouge{background:#e53935!important;color:white!important;border:none;padding:10px 14px;border-radius:8px;font-weight:800;cursor:pointer}
 .carte{border:2px solid #0d47a1;border-radius:16px;overflow:hidden;background:white}
 .carte-head{background:#0d47a1;color:white;padding:10px;text-align:center;font-size:13px;font-weight:800}
 .carte-body{display:flex;gap:12px;padding:14px}
@@ -51,18 +53,19 @@ input:disabled,select:disabled,textarea:disabled{background:#eeeeee!important;co
 </style>
 </head>
 <body>
-<header><div class="logo"><div class="cercle">ARN</div><div><b>Alliance pour la<br>Renaissance Nutritionnelle</b><br><i>FORMER - ACCOMPAGNER - IMPACTER</i></div></div><div id="btnMenu" onclick="ouvrirMenu()">☰<span id="notifRouge">0</span></div></header>
-<div id="menu"><div style="text-align:right;font-size:22px;border:none" onclick="fermerMenu()">✕</div><div onclick="go('accueil')">🏠 Accueil</div><div onclick="go('verif')">✅ Vérification matricule</div><div onclick="go('creer')">➕ Créer mon compte</div><div onclick="go('login')">🔑 Se connecter</div><div onclick="go('secret')">🔐 Zone Secrétaire / Admin <span id="menuNotif" style="color:#e53935;font-weight:900"></span></div><div onclick="go('bulletin')">📄 Retirer mon bulletin</div></div>
+<header><div class="logo"><div class="cercle">ARN</div><div><b>Alliance pour la<br>Renaissance Nutritionnelle</b><br><i>FORMER - ACCOMPAGNER - IMPACTER</i></div></div><div id="btnMenu" onclick="ouvrirMenu(event)">☰<span id="notifRouge">0</span></div></header>
+<div id="overlay" onclick="fermerMenu()"></div>
+<div id="menu"><div style="text-align:right;font-size:24px;border:none" onclick="fermerMenu()">✕ Fermer</div><div onclick="go('accueil')">🏠 Accueil</div><div onclick="go('verif')">✅ Vérification matricule</div><div onclick="go('creer')">➕ Créer mon compte</div><div onclick="go('login')">🔑 Se connecter</div><div onclick="go('secret')">🔐 Zone Secrétaire / Admin <span id="menuNotif" style="color:#e53935;font-weight:900"></span></div><div onclick="go('bulletin')">📄 Retirer mon bulletin</div></div>
 
-<div id="p-accueil"><div class="hero"><h1>ARN là où commence la vie<br>nous agissons</h1><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800"></div><div class="btn vert" onclick="go('verif')">✅ Vérification matricule</div><div class="btn bleu" onclick="go('creer')">Créer mon compte</div><div class="btn noir" onclick="go('login')">Se connecter</div><div class="box" style="text-align:center;color:#555;font-size:13px;line-height:1.6"><b style="color:#111">Alliance pour la Renaissance Nutritionnelle</b><br>FORMER - ACCOMPAGNER - IMPACTER<br>Là où commence la vie, nous agissons.<br>Siège ARN : <b>Soumambossia</b></div><div class="btn gris" onclick="go('secret')">🔐 Zone Secrétaire / Admin</div></div>
+<div id="p-accueil"><div class="hero"><h1>ARN là où commence la vie<br>nous agissons</h1><img src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?w=800&q=80" alt="ARN Soumambossia"></div><div class="btn vert" onclick="go('verif')">✅ Vérification matricule</div><div class="btn bleu" onclick="go('creer')">➕ Créer mon compte</div><div class="btn noir" onclick="go('login')">🔑 Se connecter</div><div class="box" style="text-align:center;color:#555;font-size:13px;line-height:1.6"><b style="color:#111">Alliance pour la Renaissance Nutritionnelle</b><br>FORMER - ACCOMPAGNER - IMPACTER<br>Là où commence la vie, nous agissons.<br>Siège ARN : <b>Soumambossia</b></div><div class="btn gris" onclick="go('secret')">🔐 Zone Secrétaire / Admin</div></div>
 
-<div id="p-verif" style="display:none"><div class="box"><h2>✅ Vérification matricule</h2><label>Matricule</label><input id="vMat" placeholder="Ex : ARN 2026 0001"><div class="btn vert" onclick="verifier()">VÉRIFIER</div><div id="resVerif"></div></div></div>
-<div id="p-creer" style="display:none"><div class="box"><h2>➕ Créer mon compte</h2><p style="font-size:13px;color:#666">Principe : Chaque personne reçoit son Matricule → se connecte → doit compléter sa fiche. Elle ne voit ses infos complètes qu'une fois validée par l'Admin.</p><label>Matricule reçu</label><input id="cMat" placeholder="ARN 2026 0001"><label>Mot de passe (généré par la personne)</label><input id="cPass" type="password" placeholder="Crée ton mot de passe"><label>Confirme le mot de passe</label><input id="cPass2" type="password" placeholder="Confirme"><div class="btn bleu" onclick="creerCompte()">CRÉER MON COMPTE</div><div id="resCreer"></div></div></div>
-<div id="p-login" style="display:none"><div class="box"><h2>🔑 Se connecter</h2><label>Matricule</label><input id="lMat" placeholder="ARN 2026 0001"><label>Mot de passe</label><input id="lPass" type="password" placeholder="Mot de passe"><div class="btn bleu" onclick="login()">SE CONNECTER</div><div id="resLogin"></div></div></div>
+<div id="p-verif" style="display:none"><div class="box"><h2>✅ Vérification matricule</h2><label>Matricule</label><input id="vMat" placeholder="Ex : ARN 2026 0001"><div class="btn vert" onclick="verifier()">VÉRIFIER</div><div id="resVerif"></div><div class="btn gris" onclick="go('accueil')">⬅ Retour Accueil</div></div></div>
+<div id="p-creer" style="display:none"><div class="box"><h2>➕ Créer mon compte</h2><p style="font-size:13px;color:#666">Principe : Chaque personne reçoit son Matricule → se connecte → doit compléter sa fiche. Elle ne voit ses infos complètes qu'une fois validée par l'Admin.</p><label>Matricule reçu</label><input id="cMat" placeholder="ARN 2026 0001"><label>Mot de passe (généré par la personne)</label><input id="cPass" type="password" placeholder="Crée ton mot de passe"><label>Confirme le mot de passe</label><input id="cPass2" type="password" placeholder="Confirme"><div class="btn bleu" onclick="creerCompte()">CRÉER MON COMPTE</div><div id="resCreer"></div><div class="btn gris" onclick="go('login')">J'ai déjà un compte → Se connecter</div></div></div>
+<div id="p-login" style="display:none"><div class="box"><h2>🔑 Se connecter</h2><label>Matricule</label><input id="lMat" placeholder="ARN 2026 0001"><label>Mot de passe</label><input id="lPass" type="password" placeholder="Mot de passe"><div class="btn bleu" onclick="login()">SE CONNECTER</div><div id="resLogin"></div><div class="btn gris" onclick="go('creer')">Pas de compte ? Créer mon compte</div></div></div>
 
 <div id="p-secret" style="display:none"><div class="box"><h2>🔐 Zone Secrétaire / Admin</h2><p style="font-size:13px;color:#666">Accès réservé. Seul l'Admin peut voir TOUT, valider, verrouiller / déverrouiller.</p>
 <div id="alerteDemandes" class="alerte-rouge" style="display:none" onclick="document.getElementById('zoneDemandes').scrollIntoView({behavior:'smooth'})">🔴 <span id="nbDemandesTxt"></span><br><span style="font-size:12px;font-weight:400">Clique ici pour voir et déverrouiller</span></div>
-<label>Code Admin</label><input id="codeSec" type="password" placeholder="Entre ton code Admin"><div class="btn noir" onclick="ouvrirSecret()">ENTRER</div><div id="zoneSec" style="display:none">
+<label>Code Admin</label><input id="codeSec" type="password" placeholder="Entre ton code Admin"><div class="btn noir" onclick="ouvrirSecret()">ENTRER DANS LA ZONE ADMIN</div><div id="zoneSec" style="display:none">
 <label>Ajouter un matricule</label><input id="newMat" placeholder="ARN 2026 0001"><div class="btn vert" onclick="ajouterMat()">+ AJOUTER MATRICULE</div>
 <h3 style="margin:12px 0">Liste (<span id="nbMat">0</span> / 10000)</h3><input placeholder="Rechercher..." oninput="afficherMat(this.value)"><div id="listeMat"></div>
 <h3 style="margin:14px 0">✅ Fiches à valider - Admin seul</h3><div id="listeAttente"></div>
@@ -75,7 +78,6 @@ input:disabled,select:disabled,textarea:disabled{background:#eeeeee!important;co
 <label>Contenu</label><textarea id="bTexte" placeholder="Contenu du bulletin..."></textarea>
 <div class="btn bleu" onclick="ajouterBulletin()">ENVOYER À UN SEUL MEMBRE</div>
 <div class="btn vert" onclick="ajouterBulletinTous()">📢 ENVOYER À TOUS LES MEMBRES</div>
-<p style="font-size:12px;color:#666;text-align:center">Le bulletin envoyé à tous sera visible par chaque membre avec son matricule.</p>
 <div id="listeBulletinsSec"></div>
 <h3 style="margin:14px 0">🕵️ Traces de modifications</h3><div id="listeTraces"></div>
 </div></div></div>
@@ -84,6 +86,70 @@ input:disabled,select:disabled,textarea:disabled{background:#eeeeee!important;co
 
 <div id="p-membre" style="display:none"><div class="box">
 <div style="display:flex;justify-content:space-between;align-items:center"><h2>Mon Espace ARN</h2><span id="statutBadge" class="badge attente">EN ATTENTE</span></div>
+<div class="carte" style="margin-top:12px"><div class="carte-head">ALLIANCE POUR LA RENAISSANCE NUTRITIONNELLE - CARTE MEMBRE - SOUMAMBOSSIA</div><div class="carte-body"><img id="mPhoto" class="photo" src="https://via.placeholder.com/115x135?text=PHOTO"><div style="text-align:center"><img id="mQR" class="qr" src=""><p style="font-size:11px">Scanne pour vérifier</p></div></div><div class="carte-info"><b id="mMat">ARN 2026 0001</b><br><span id="mNomComplet">Nom Prénom</span><br><span id="mVilleTxt">Soumambossia - Fonction</span><br><span id="mProfTxt">Profession - Grade</span></div></div>
+<div id="zoneVerrouille" class="verrouille" style="display:none">🔒 Fiche validée par l'Admin - VERROUILLÉE<br><span style="font-weight:400;font-size:12px;color:#333">Tu ne peux plus modifier. Contacte l'Admin pour demander un déverrouillage.</span><br><div class="btn orangeBtn" style="margin:10px 0 0" onclick="demanderDeverrouillage()">📩 DEMANDER UN DÉVERROUILLAGE</div></div>
+<div class="titre-niveau">NIVEAU 1 : ACCÈS ET SÉCURITÉ</div><p style="font-size:12px;color:#666">Le plus important - Protège tout le système</p>
+<label>Matricule (Généré par le système, unique, non modifiable)</label><input id="fMatricule" readonly>
+<label>Mot de passe : généré par la personne</label><input id="fPassInfo" readonly placeholder="********">
+<label>Photo de profil face visible (Obligatoire, fond blanc) *</label><input id="fPhoto" type="file" accept="image/*">
+<div class="titre-niveau vert2">NIVEAU 2 : INFORMATIONS PERSONNELLES</div>
+<label>Prénom et Nom *</label><input id="fNom" placeholder="Ex : Aïcha Diallo">
+<label>Sexe *</label><select id="fSexe"><option value="">Choisir</option><option>Masculin</option><option>Féminin</option></select>
+<label>Date de naissance : JJ/MM/AAAA *</label><input id="fNaiss" type="date" onchange="calculAge()">
+<label>Âge : (Calcul auto)</label><input id="fAge" readonly placeholder="Âge calculé automatiquement">
+<label>Lieu de Naissance</label><input id="fLieuNaiss" placeholder="Ex : Conakry">
+<label>Nationalité</label><input id="fNationalite" placeholder="Ex : Guinéenne" value="Guinéenne">
+<label>Groupe sanguin</label><select id="fSang"><option value="">Choisir</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
+<label>Photo d'identité</label><input id="fPhotoIdentite" type="file" accept="image/*">
+<div class="titre-niveau">NIVEAU 3 : FILIATION ET SITUATION FAMILIALE</div>
+<label>Nom du Père</label><input id="fPere" placeholder="Ex : Mamadou Diallo">
+<label>Nom de la Mère</label><input id="fMere" placeholder="Ex : Fatoumata Diallo">
+<label>Situation matrimoniale</label><select id="fEtatCivil"><option value="">Choisir</option><option>Célibataire</option><option>Marié(e)</option><option>Divorcé(e)</option><option>Veuf(ve)</option></select>
+<label>Personne à contacter en cas d'urgence (Nom)</label><input id="fUrgNom" placeholder="Ex : Mamadou Diallo">
+<label>Personne à contacter en cas d'urgence (Contact)</label><input id="fUrgTel" placeholder="Ex : 622 00 00 00">
+<div class="titre-niveau vert2">NIVEAU 4 : MES INFORMATIONS ARN</div>
+<label>Série</label><input id="fSerie" placeholder="Ex : Série A / Série 1">
+<label>Matricule : (Rappel)</label><input id="fMatricule2" readonly>
+<label>Fonction : (Ex : Agent, Secrétaire, Chef d'équipe)</label><select id="fFonction"><option value="">Choisir</option><option>Agent</option><option>Secrétaire</option><option>Chef d'équipe</option><option>Membre</option><option>Formateur</option><option>Autre</option></select>
+<label>Profession</label><input id="fProf" placeholder="Ex : Nutritionniste / Infirmier / Étudiant">
+<label>Grade / Rang</label><input id="fGrade" placeholder="Ex : Grade 1 / Rang A">
+<label>Date d'engagement / d'intégration</label><input id="fDateEngage" type="date">
+<label>Siège ARN : Soumambossia (Fixe, non modifiable)</label><input value="Soumambossia" readonly>
+<label>Statut : (Validé par l'Admin seul)</label><input id="fStatut" readonly placeholder="En attente de validation Admin">
+<label>Chef hiérarchique direct</label><input id="fChef" placeholder="Ex : Nom du Chef">
+<div class="titre-niveau orange">NIVEAU 5 : COORDONNÉES ET TRAÇABILITÉ</div>
+<label>Adresse complète (Quartier / Commune / Ville)</label><input id="fAdresse" placeholder="Ex : Soumambossia, Ratoma, Conakry">
+<label>Email : (Vérifié par code)</label><input id="fEmail" placeholder="exemple@gmail.com">
+<div style="display:flex;gap:8px"><input id="fCodeEmail" placeholder="Code reçu par Email" style="flex:1"><button class="petit" onclick="envoyerCodeEmail()" style="white-space:nowrap">Envoyer code</button></div><p id="msgCode" style="font-size:12px;color:#2e7d32;margin-top:5px"></p>
+<label>Contact 1 (Appel) *</label><input id="fTel" placeholder="Ex : 622 00 00 00">
+<label>Contact 2 (WhatsApp)</label><input id="fWhatsapp" placeholder="Ex : 622 00 00 00">
+<label>Signature numérique</label><input id="fSignature" type="file" accept="image/*"><p style="font-size:12px;color:#666">Signe sur papier blanc, prends en photo et envoie ici.</p>
+<div id="btnSaveZone"><div class="btn vert" onclick="sauverFiche()">💾 ENREGISTRER MA FICHE COMPLÈTE</div></div><div id="resFiche"></div>
+<div class="trace" id="maTrace"></div>
+<div class="btn gris" onclick="go('bulletin')">📄 Voir mes bulletins</div>
+<div class="btn rouge" style="display:block;text-align:center" onclick="logout()">Déconnexion</div>
+</div></div>
+<div id="p-public" style="display:none"><div class="box"><h2>✅ Fiche Vérifiée ARN - Soumambossia</h2><div id="resPublic"></div></div></div>
+
+<script>
+let mats=JSON.parse(localStorage.getItem('arn_mats')||'["ARN 2026 0001","ARN 2026 0002","ARN 2026 0003"]');
+let users=JSON.parse(localStorage.getItem('arn_users')||'{}');
+let fiches=JSON.parse(localStorage.getItem('arn_fiches')||'{}');
+let bulletins=JSON.parse(localStorage.getItem('arn_bulletins')||'[]');
+let traces=JSON.parse(localStorage.getItem('arn_traces')||'[]');
+let demandes=JSON.parse(localStorage.getItem('arn_demandes')||'[]');
+let codeEmailActuel="";let session=null;
+function save(){localStorage.setItem('arn_mats',JSON.stringify(mats));localStorage.setItem('arn_users',JSON.stringify(users));localStorage.setItem('arn_fiches',JSON.stringify(fiches));localStorage.setItem('arn_bulletins',JSON.stringify(bulletins));localStorage.setItem('arn_traces',JSON.stringify(traces));localStorage.setItem('arn_demandes',JSON.stringify(demandes));}
+function jouerSonAlerte(){try{let ctx=new (window.AudioContext||window.webkitAudioContext)();[0,0.25,0.5].forEach((d)=>{let o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;o.type='sine';g.gain.value=0.2;o.start(ctx.currentTime+d);o.stop(ctx.currentTime+d+0.2);});}catch(e){}}
+function majNotif(){let n=demandes.length;let el=document.getElementById('notifRouge');let menuNotif=document.getElementById('menuNotif');if(el){if(n>0){el.style.display='flex';el.innerText=n;}else el.style.display='none';}if(menuNotif)menuNotif.innerText=n>0?'🔴 '+n:'';let al=document.getElementById('alerteDemandes');if(al){if(n>0){al.style.display='block';document.getElementById('nbDemandesTxt').innerText=n===1?'🔴 1 DEMANDE DE DÉVERROUILLAGE EN ATTENTE':'🔴 '+n+' DEMANDES DE DÉVERROUILLAGE EN ATTENTE';}else al.style.display='none';}}
+function ouvrirMenu(e){if(e)e.stopPropagation();document.getElementById('menu').style.display='block';document.getElementById('overlay').style.display='block';majNotif();}
+function fermerMenu(){let m=document.getElementById('menu');if(m)m.style.display='none';let o=document.getElementById('overlay');if(o)o.style.display='none';}
+function go(id){fermerMenu();let pages=['accueil','verif','creer','login','secret','bulletin','membre','public'];pages.forEach(x=>{let el=document.getElementById('p-'+x);if(el)el.style.display='none';});let cible=document.getElementById('p-'+id);if(cible)cible.style.display='block';window.scrollTo(0,0);majNotif();}
+function norm(m){return (m||'').trim().toUpperCase().replace(/\s+/g,' ')}
+function calculAge(){let d=document.getElementById('fNaiss').value;if(!d)return;let naiss=new Date(d);let auj=new Date();let age=auj.getFullYear()-naiss.getFullYear();let m=auj.getMonth()-naiss.getMonth();if(m<0||(m===0&&auj.getDate()<naiss.getDate()))age--;document.getElementById('fAge').value=age+' ans';return age;}
+function ajouterTrace(mat,quoi){traces.unshift({mat:mat,qui:mat,quand:new Date().toLocaleString('fr-FR'),quoi:quoi});save();}
+function verifier(){let m=norm(document.getElementById('vMat').value);document.getElementById('resVerif').innerHTML=mats.includes(m)?'<div class="box" style="background:#e8f5e9;margin:10px 0"><b>✅ Matricule valide : '+m+'</b><br>Siège : Soumambossia</div><div class="btn bleu" onclick="go(\'creer\')">Créer mon compte</div>':'<div class="box" style="background:#ffebee;margin:10px 0"><b>❌ Matricule introuvable.</b></div>';}
+function creerCompte(){let m=norm(document.getElementById('cMat').value),p=document.getElementById('cPass').value,p2=document.getElementById('cPass2').value;if(!mats.includes(m))return document.getElementById('resCreer').innerHTML='<b style="color:red">Matricule invalide.</b>';if(users[m])return document.getElementById('resCreer').innerHTML='<b style="color:red">Compte déjà créé. Connecte-toi.</b>';if(!p||p!==p2)return 
 <div class="carte" style="margin-top:12px"><div class="carte-head">ALLIANCE POUR LA RENAISSANCE NUTRITIONNELLE - CARTE MEMBRE - SOUMAMBOSSIA</div><div class="carte-body"><img id="mPhoto" class="photo" src="https://via.placeholder.com/115x135?text=PHOTO"><div style="text-align:center"><img id="mQR" class="qr" src=""><p style="font-size:11px">Scanne pour vérifier</p></div></div><div class="carte-info"><b id="mMat">ARN 2026 0001</b><br><span id="mNomComplet">Nom Prénom</span><br><span id="mVilleTxt">Soumambossia - Fonction</span><br><span id="mProfTxt">Profession - Grade</span></div></div>
 <div id="zoneVerrouille" class="verrouille" style="display:none">🔒 Fiche validée par l'Admin - VERROUILLÉE<br><span style="font-weight:400;font-size:12px;color:#333">Tu ne peux plus modifier. Contacte l'Admin pour demander un déverrouillage.</span><br><div class="btn orangeBtn" style="margin:10px 0 0" onclick="demanderDeverrouillage()">📩 DEMANDER UN DÉVERROUILLAGE</div></div>
 <div class="titre-niveau">NIVEAU 1 : ACCÈS ET SÉCURITÉ</div><p style="font-size:12px;color:#666">Le plus important - Protège tout le système</p>
