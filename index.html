@@ -3,67 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARN</title>
+<title>ARN - Alliance pour la Renaissance Nutritionnelle</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f1f5f9}
-header{background:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.logo{width:42px;height:42px;background:#0d47a1;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
-.card{width:96%;max-width:720px;margin:12px auto;background:#fff;padding:14px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.btn{padding:10px 14px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
-.bleu{background:#0d47a1;color:#fff}.gris{background:#e5e7eb}.vert{background:#16a34a;color:#fff}
-input{width:100%;padding:12px;margin:6px 0;border:1px solid #cbd5e1;border-radius:8px}
-.item{border:1px solid #e2e8f0;padding:10px;margin-top:8px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;background:#f8fafc}
-.detail{margin-top:14px;border:2px solid #0d47a1;border-radius:14px;padding:12px;display:none}
-.top-qr{display:flex;justify-content:space-between;align-items:center;gap:12px;border:2px solid #0d47a1;border-radius:14px;padding:14px;background:#f8fafc;margin-top:10px}
-.photo-rond{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid #0d47a1;background:#fff}
-.qr img{width:140px;height:140px;border-radius:8px;background:#fff}
-canvas{border:2px dashed #0d47a1;width:100%;border-radius:8px;background:#fff;touch-action:none}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f5f6f8}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:white;position:sticky;top:0;z-index:1000;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.logo{display:flex;align-items:center;gap:8px}
+.logo .cercle{width:52px;height:52px;background:#0d47a1;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
+.logo b{color:#111;font-size:14px;line-height:1.2;display:block}
+.logo i{color:#2e7d32;font-size:10px;font-style:normal;font-weight:bold}
+#btnMenu{font-size:28px;padding:10px;cursor:pointer}
+#menu{position:fixed;top:0;right:0;width:260px;height:100%;background:white;z-index:2000;box-shadow:-2px 0 10px rgba(0,0,0,.2);display:none;padding:15px}
+#menu div{padding:15px 10px;border-bottom:1px solid #eee;font-size:15px;cursor:pointer}
+#menu .fermer{text-align:right;font-size:22px;border:none}
+.hero{width:100%;height:220px;background:url('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=900') center/cover}
+.alert{margin:-15px 14px 15px;background:white;border:2px solid #ff9800;border-radius:14px;padding:18px 10px;text-align:center}
+.alert p{color:#b71c1c;font-weight:700;font-style:italic;font-size:13px}
+.btns{padding:0 14px;display:flex;flex-direction:column;gap:9px;max-width:420px;margin:0 auto 18px}
+.btn{padding:13px;border-radius:8px;font-weight:700;border:2px solid;font-size:13px;text-align:center}
+.btn-outline{border-color:#0d47a1;color:#0d47a1;background:white}
+.btn-blue{background:#0d47a1;color:white;border-color:#0d47a1}
+.btn-grey{border-color:#9e9e9e;color:#616161;background:white}
+.btn-green{background:#2e7d32;color:white;border-color:#2e7d32}
+.box{background:white;margin:12px;border-radius:12px;padding:14px}
+.box input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px;font-size:14px}
+.ligne{display:flex;justify-content:space-between;align-items:center;border:1px solid #eee;border-radius:10px;padding:10px;margin-bottom:8px;background:#fff}
+.ligne b{font-size:14px}
+.voir{background:#0d47a1;color:white;border:none;padding:8px 14px;border-radius:8px;font-weight:700}
+.suppr{background:#ffecec;color:#e53935;border:none;padding:8px 10px;border-radius:8px;font-weight:700}
+.plus{background:#0d47a1;color:white;border:none;padding:12px 18px;border-radius:10px;font-size:20px}
 </style>
 </head>
 <body>
-<header><div style="display:flex;gap:8px;align-items:center"><div class="logo">ARN</div><div><b style="font-size:13px">Alliance pour la<br>Renaissance Nutritionnelle</b><br><small style="color:#16a34a;font-weight:bold;font-size:10px">FORMER - ACCOMPAGNER - IMPACTER</small></div></div><div>☰</div></header>
-<div id="admin" class="card">
-<h3>ADMIN</h3>
-<div style="display:flex;gap:6px;margin-top:8px"><input id="addM" placeholder="ARN-2026-PRES-0001" style="margin:0"><button onclick="ajouter()" style="width:70px;background:#0d47a1;color:#fff;border:none;border-radius:8px;font-weight:bold">+</button></div>
-<input id="search" placeholder="Rechercher..." oninput="render()" style="margin-top:10px">
-<div id="liste"></div>
-<div id="detail" class="detail"><h3 id="dMat" style="text-align:center;color:#0d47a1"></h3><div class="top-qr"><img id="dPhoto" class="photo-rond" style="display:none"><div id="dQR" class="qr" style="margin-left:auto"></div></div><div id="dInfos" style="margin-top:12px;line-height:1.6"></div><button class="btn gris" style="width:100%;margin-top:10px" onclick="document.getElementById('detail').style.display='none'">Fermer</button></div>
+
+<header>
+<div class="logo"><div class="cercle">ARN</div><div><b>Alliance pour la<br>Renaissance Nutritionnelle</b><i>FORMER - ACCOMPAGNER - IMPACTER</i></div></div>
+<div id="btnMenu" onclick="ouvrirMenu()">☰</div>
+</header>
+
+<div id="menu">
+<div class="fermer" onclick="fermerMenu()">✕</div>
+<div onclick="allerAccueil()">🏠 Accueil</div>
+<div onclick="allerAdmin()">⚙️ ADMIN</div>
+<div onclick="allerAccueil()">➕ Créer un compte ARN</div>
+<div onclick="allerAccueil()">🔑 Se connecter</div>
+<div onclick="allerAccueil()">✅ Vérifier Attestation ARN</div>
 </div>
+
+<div id="pageAccueil">
+<div class="hero"></div>
+<div class="alert"><p>Ouverture de la session de formation ARN<br>le : 10 Septembre 2026.<br>Rentrée Nutrition 2026 : A venir</p></div>
+<div class="btns">
+<div class="btn btn-outline" onclick="allerAdmin()">CRÉER UN COMPTE ARN Nutrition</div>
+<div class="btn btn-blue" onclick="allerAdmin()">SE CONNECTER</div>
+<div class="btn btn-grey">📄 Guide d'utilisation</div>
+<div class="btn btn-grey">❓ FAQ</div>
+<div class="btn btn-green">✅ VÉRIFIER ATTESTATION ARN</div>
+<div class="btn btn-blue" onclick="allerAdmin()">⚙️ ALLER A ADMIN</div>
+</div>
+</div>
+
+<div id="pageAdmin" style="display:none">
+<div class="box">
+<h2 style="margin-bottom:12px">ADMIN</h2>
+<div style="display:flex;gap:8px">
+<input id="champId" placeholder="ARN-2026-PRES-0001">
+<button class="plus" onclick="ajouter()">+</button>
+</div>
+<input placeholder="Rechercher..." oninput="filtrer(this.value)">
+<div id="liste"></div>
+</div>
+</div>
+
 <script>
-var liste=JSON.parse(localStorage.getItem('arn_liste_v2')||'[]');
-var users=JSON.parse(localStorage.getItem('arn_users_v2')||'{}');
-if(liste.length==0){liste=['ARN-2026-PRES-0001'];for(var i=1;i<=800;i++){liste.push('ARN-2026-'+String(i).padStart(4,'0'));}users['ARN-2026-0001']={matricule:'ARN-2026-0001',nom:"Fara M'bindy Kamano",fonc:"Président",aff:"Conakry",password:"1234"};}
-function saveLS(){localStorage.setItem('arn_liste_v2',JSON.stringify(liste));localStorage.setItem('arn_users_v2',JSON.stringify(users));}
-function ajouter(){var m=document.getElementById('addM').value.trim().toUpperCase();if(!m)return;if(liste.indexOf(m)===-1){liste.push(m);liste.sort();saveLS();}render();}
-function render(){var f=(document.getElementById('search').value||'').toUpperCase();var aff=f?liste.filter(function(x){var u=users[x]||{};return x.indexOf(f)>-1||(u.nom||'').toUpperCase().indexOf(f)>-1;}):liste.slice().reverse().slice(0,150);var h='';for(var j=0;j<aff.length;j++){var mm=aff[j];var uu=users[mm]||{};var nom=uu.nom||'Vide';h+='<div class=item><div><b>'+mm+'</b> - '+nom+'</div><div style="display:flex;gap:4px"><button class="btn bleu" style="padding:6px 10px;font-size:12px" onclick="voir(\''+mm+'\')">Voir</button><button class="btn gris" style="padding:6px 8px;background:#fee2e2;color:#dc2626" onclick="supprimer(\''+mm+'\')">X</button></div></div>';}document.getElementById('liste').innerHTML=h;}
-function supprimer(mm){if(!confirm('Supprimer '+mm+' ?'))return;var i=liste.indexOf(mm);if(i>-1)liste.splice(i,1);delete users[mm];saveLS();render();document.getElementById('detail').style.display='none';}
-function voir(m){var u=users[m]||{};document.getElementById('detail').style.display='block';document.getElementById('dMat').textContent=m;var ph=document.getElementById('dPhoto');if(u.photoProfil){ph.src=u.photoProfil;ph.style.display='block';}else{ph.style.display='none';}var html='';html+='<div><b>Nom:</b> '+(u.nom||'<span style=color:#94a3b8>Non renseigné</span>')+'</div>';html+='<div><b>Fonction:</b> '+(u.fonc||'<span style=color:#94a3b8>Non renseignée</span>')+'</div>';html+='<div><b>Affectation:</b> '+(u.aff||'<span style=color:#94a3b8>Non renseignée</span>')+'</div>';if(u.signature)html+='<div style=margin-top:10px><b>Signature:</b><br><img src='+u.signature+' style=width:100%;max-width:320px;border:1px solid #000;border-radius:8px></div>';document.getElementById('dInfos').innerHTML=html;var lien=location.origin+location.pathname+'?verif='+encodeURIComponent(m);var cont=(u.nom||m)+'\n'+lien;document.getElementById('dQR').innerHTML='<img src=https://api.qrserver.com/v1/create-qr-code/?size=240x240&data='+encodeURIComponent(cont)+'>';}
-render();
+let dossiers = ["ARN-2026-0800","ARN-2026-0799","ARN-2026-0798","ARN-2026-0797","ARN-2026-0796","ARN-2026-0795","ARN-2026-0794"];
+function ouvrirMenu(){document.getElementById('menu').style.display='block'}
+function fermerMenu(){document.getElementById('menu').style.display='none'}
+function allerAccueil(){fermerMenu();document.getElementById('pageAccueil').style.display='block';document.getElementById('pageAdmin').style.display='none';window.scrollTo(0,0)}
+function allerAdmin(){fermerMenu();document.getElementById('pageAccueil').style.display='none';document.getElementById('pageAdmin').style.display='block';window.scrollTo(0,0);afficher('')}
+function afficher(filtre){
+let html='';
+dossiers.forEach(function(id){
+if(id.toLowerCase().includes(filtre.toLowerCase())){
+html += '<div class="ligne"><b>'+id+' - Vide</b><div><button class="voir" onclick="alert(\''+id+'\')">Voir</button> <button class="suppr" onclick="supprimer(\''+id+'\')">X</button></div></div>';
+}
+});
+document.getElementById('liste').innerHTML = html;
+}
+function filtrer(v){afficher(v)}
+function ajouter(){
+let v=document.getElementById('champId').value;
+if(!v){alert('Ecris un ID');return;}
+dossiers.unshift(v);document.getElementById('champId').value='';afficher('');
+}
+function supprimer(id){
+dossiers = dossiers.filter(function(x){return x!==id});
+afficher('');
+}
+afficher('');
 </script>
 </body>
-</html>enderAdmin();alert('✅ '+mat+' ajouté et visible')}
-function renderAdmin(){let filtre=document.getElementById('searchAdmin').value.toUpperCase().trim();let aAfficher;if(filtre){aAfficher=liste.filter(m=>m.includes(filtre))}else{aAfficher=liste.slice().reverse().slice(0,200)}let h='<small>'+liste.length+' matricules | Modèle: ARN 2026 0001</small>';aAfficher.forEach(m=>{let u=users[m]||{};h+=`<div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-top:6px"><b>${m}</b> - ${u.nom||'Vide'}<br><button onclick="voirDetailAdmin('${m}')" style="background:#1e40af;color:#fff;border:none;padding:6px 12px;border-radius:5px;margin-right:4px">Voir</button><button onclick="supprimerMat('${m}')" style="background:#fee2e2;color:red;border:1px solid #fecaca;padding:6px 10px;border-radius:5px">❌</button></div>`});document.getElementById('adminListe').innerHTML=h}
-function voirDetailAdmin(m){
-  let u=users[m]||{};
-  document.getElementById('dMat').textContent=m;
-  let html='';
-  if(u.photoProfil)html+=`<img src="${u.photoProfil}" style="width:80px;height:80px;border-radius:50%;margin-bottom:8px"><br>`;
-  if(!u.nom){
-    html+=`<div style="background:#fff3cd;padding:10px;border-radius:8px"><b>Matricule:</b> ${m}<br><b>Statut:</b> Généré - Fiche vide<br><b>Password:</b> ${u.password?'Oui':'Non'}</div>`;
-  }else{
-    for(let k in u){if(['photoProfil','password','signature'].includes(k))continue;html+=`<div style="font-size:13px;border-bottom:1px dashed #ddd;padding:4px 0"><b>${k}:</b> ${u[k]}</div>`}
-  }
-  if(u.signature)html+=`<div style="margin-top:8px"><b>Signature:</b><br><img src="${u.signature}" style="width:100%;border:1px solid #000;border-radius:6px"></div>`;
-  document.getElementById('dContent').innerHTML=html;
-  document.getElementById('adminDetail').style.display='block';
-  setTimeout(()=>{document.getElementById('adminDetail').scrollIntoView({behavior:'smooth'})},100);
-}
-function supprimerMat(m){if(!confirm('Supprimer définitivement '+m+' ?'))return;liste=liste.filter(x=>x!==m);if(users[m])delete users[m];saveLS();document.getElementById('searchAdmin').value='';renderAdmin();alert('✅ Supprimé définitivement')}
-function loadFiche(){let u=users[current]||{};document.getElementById('fMatricule').textContent=current;['nom','sexe','dob','lieu','nat','gs','pere','mere','sit','conj','urg','serie','fonc','prof','grade','eng','aff','adr','email','c1','c2'].forEach(k=>{let el=document.getElementById('f_'+k);if(el&&u[k])el.value=u[k]});if(u.photoProfil){document.getElementById('prev_profil').src=u.photoProfil;document.getElementById('prev_profil').style.display='block'}if(u.signature){document.getElementById('sigPreview').src=u.signature;document.getElementById('sigPreview').style.display='block'}}
-function sauverFiche(){let u=users[current];if(!u)u=users[current]={};['nom','sexe','dob','lieu','nat','gs','pere','mere','sit','conj','urg','serie','fonc','prof','grade','eng','aff','adr','email','c1','c2'].forEach(k=>{let el=document.getElementById('f_'+k);if(el)u[k]=el.value});if(!u.photoProfil){alert('Photo obligatoire');return}if(!u.signature){alert('Signature obligatoire');return}let man=[];['nom','sexe','dob','lieu','pere','mere','urg','serie','fonc','prof','grade','eng','aff','adr','email','c1','c2'].forEach(k=>{if(!u[k]||u[k].trim()==='')man.push(k)});if(man.length){alert('Remplis: '+man.join(', '));return}saveLS();alert('✅ Fiche sauvée !')}
-function savePhoto(i,k){let f=i.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{users[current][k]=e.target.result;saveLS();if(k==='photoProfil'){document.getElementById('prev_profil').src=e.target.result;document.getElementById('prev_profil').style.display='block'}};r.readAsDataURL(f)}
-function initCanvas(){let c=document.getElementById('sigCanvas');if(!c)return;let ctx=c.getContext('2d'),d=false;function p(e){let r=c.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return {x:(t.clientX-r.left)*(c.width/r.width),y:(t.clientY-r.top)*(c.height/r.height)}}c.onmousedown=e=>{d=true;let q=p(e);ctx.beginPath();ctx.moveTo(q.x,q.y)};c.onmousemove=e=>{if(!d)return;let q=p(e);ctx.lineWidth=2;ctx.lineCap='round';ctx.strokeStyle='#000';ctx.lineTo(q.x,q.y);ctx.stroke()};c.onmouseup=()=>d=false;c.ontouchstart=e=>{e.preventDefault();d=true;let q=p(e);ctx.beginPath();ctx.moveTo(q.x,q.y)};c.ontouchmove=e=>{e.preventDefault();if(!d)return;let q=p(e);ctx.lineWidth=2;ctx.lineCap='round';ctx.strokeStyle='#000';ctx.lineTo(q.x,q.y);ctx.stroke()};c.ontouchend=()=>d=false}
+  </html>x.stroke()};c.ontouchend=()=>d=false}
 function clearSig(){let c=document.getElementById('sigCanvas');c.getContext('2d').clearRect(0,0,c.width,c.height);document.getElementById('sigPreview').style.display='none';if(users[current])delete users[current].signature}
 function saveSig(){let c=document.getElementById('sigCanvas'),data=c.toDataURL();if(data.length<1000){alert('Dessine !');return}users[current].signature=data;document.getElementById('sigPreview').src=data;document.getElementById('sigPreview').style.display='block';saveLS();alert('Signature validée !')}
 </script></body></html>
